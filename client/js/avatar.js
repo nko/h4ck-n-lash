@@ -1,6 +1,10 @@
 Avatar = function(options){
   this.id = Math.random();
   this.name = options.name || 'anonymous';
+  this.move = {
+    left: false,
+    right: false
+  };
   this.velocity = {x:0, y:0};
   this.position = {x:0,y:0};
   this.dom_element = $('<div id="avatar-'+this.id+'" class="avatar"><div class="avatar-name">'+this.name+'</div></div>') 
@@ -9,21 +13,31 @@ Avatar = function(options){
 Avatar.prototype = {
   
   accelerate_left : function(){
-    this.velocity.x--; 
+    this.velocity.x -= AVATAR_RUN_ACCEL; 
+  }, 
+  accelerate_right: function(){
+    this.velocity.x += AVATAR_RUN_ACCEL; 
   },
 
-  accelerate_right: function(){
-    this.velocity.x++; 
-  },
   accelerate_up: function(){
     this.velocity.y++;
   },
+
   update_position : function(){
+    if(this.move.left) this.accelerate_left();
+    if(this.move.right) this.accelerate_right();
+
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
+
+    // apply friction
+    if(!this.move.left && !this.move.right) {
+      this.velocity.x *= AVATAR_FRICTION;
+      if( Math.abs(this.velocity.x) <= 0.05) this.velocity.x = 0;
+    }
   },
 
   update_display: function(){
-    $(this.dom_element).offset({top:this.position.y, left:this.position.x});
+    $(this.dom_element).css({top:this.position.y, left:this.position.x});
   }
 };

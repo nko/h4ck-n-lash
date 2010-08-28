@@ -52,21 +52,19 @@ describe("Game", function() {
         });    
   
         it('should move left when player presses left', function(){
-          var before_position = $('.avatar').offset();
+          var before_position = $('.avatar').css('left');
           simulate_left_key_press();
           game.next_tick();
-          var after_position = $('.avatar').offset();
-          console.log('before_position: ',before_position);
-          console.log('after_position: ',after_position);
-          expect(before_position.left).toBeGreaterThan(after_position.left);
+          var after_position = $('.avatar').css('left');
+          expect(before_position).toBeGreaterThan(after_position);
         });
 
         it('should move right when player presses right', function(){
-          var before_position = $('.avatar').offset();
+          var before_position = $('.avatar').css('left');
           simulate_right_key_press();
           game.next_tick();
-          var after_position = $('.avatar').offset();
-          expect(before_position.left).toBeLessThan(after_position.left);
+          var after_position = $('.avatar').css('left');
+          expect(before_position).toBeLessThan(after_position);
         });
 
       });

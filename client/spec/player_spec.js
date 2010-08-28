@@ -33,34 +33,39 @@ describe("Player", function() {
       game = new Game();
       player = new Player();
     });
-
+    describe('not pressing any arrow keys', function(){
+      it('should eventaully return x velocity to 0', function(){
+        player.avatar.velocity.x = 5;
+        jasmine.Clock.tick( ONE_GAME_TICK*50 );
+        expect(player.avatar.velocity.x).toEqual(0);
+      });
+    });
     describe("presses left arrow", function() {
       beforeEach(function() {
         simulate_left_key_press();
+        game.next_tick();
       });
       
       it('should change velocity on keydown', function(){
-        expect(player.avatar.velocity.x).toEqual(-1);
+        expect(player.avatar.velocity.x).toEqual(-AVATAR_RUN_ACCEL);
       });
 
       it('should move left', function(){
-        game.next_tick();
-        expect(player.avatar.position.x).toEqual(-1);
+        expect(player.avatar.position.x).toEqual(-AVATAR_RUN_ACCEL);
       });
-
     });
     describe("presses right arrow", function() {
       beforeEach(function() {
         simulate_right_key_press();
+        game.next_tick();
       });
       
       it('should change velocity on keydown', function(){
-        expect(player.avatar.velocity.x).toEqual(1);
+        expect(player.avatar.velocity.x).toEqual(AVATAR_RUN_ACCEL);
       });
 
       it('should move right', function(){
-        game.next_tick();
-        expect(player.avatar.position.x).toEqual(1);
+        expect(player.avatar.position.x).toEqual(AVATAR_RUN_ACCEL);
       });
 
     });

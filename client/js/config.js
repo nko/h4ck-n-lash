@@ -1,3 +1,7 @@
+ONE_GAME_TICK = 50;
+AVATAR_RUN_ACCEL = 3;
+AVATAR_FRICTION = 0.5;
+
 Config = {
   key_codes : {
     left: 37,
@@ -6,6 +10,8 @@ Config = {
     down: 40
   }
 };
+
+
 if (!window.console )
 {
     var names = ["log", "debug", "info", "warn", "error", "assert", "dir", "dirxml",
@@ -20,4 +26,3 @@ if (!window.console )
       
 }
 
-ONE_GAME_TICK = 50;
