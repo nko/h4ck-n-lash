@@ -52,11 +52,12 @@ Game.prototype = {
     });
   },
   refresh_display: function() {
-    $('#sprite-container').html('');
+    var sprites_html = [];
     $.each(this.sprites,function( i, sprite){
-      sprite.update_display(); 
-      $('#sprite-container').append(sprite.html); 
+      sprites_html.push(sprite.html);
     });
+    $('#sprite-container').empty();
+    $('#sprite-container').html(sprites_html.join(''));
   },
   add_platform: function(platform) {
     this.platforms.push(platform);

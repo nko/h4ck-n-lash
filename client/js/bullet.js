@@ -12,9 +12,6 @@ Bullet.prototype = {
     this.position.x += this.velocity.x;
   },
   get html() {
-    return '<div class="bullet" style="top:'+this.position.y+'px;left:'+this.position.x+'px;"></div>';
-  },
-
-  update_display: function() {
+    return '<div class="bullet" style="top:'+Math.floor(this.position.y)+'px;left:'+Math.floor(this.position.x)+'px;"></div>';
   }
 }

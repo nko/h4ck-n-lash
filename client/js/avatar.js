@@ -13,7 +13,7 @@ Avatar = function(options){
 
 Avatar.prototype = {
   get html() {
-    return '<div id="avatar-'+this.id+'" class="avatar" style="top:'+this.position.y+'px;left:'+this.position.x+'px;"><div class="avatar-name">'+this.name+'</div></div>';
+    return '<div id="avatar-'+this.id+'" class="avatar" style="top:'+Math.floor(this.position.y)+'px;left:'+Math.floor(this.position.x)+'px;"><div class="avatar-name">'+this.name+'</div></div>';
   },
 
   accelerate_left : function(){
@@ -79,8 +79,5 @@ Avatar.prototype = {
       this.velocity.x *= AVATAR_FRICTION;
       if( Math.abs(this.velocity.x) <= 0.05) this.velocity.x = 0;
     }
-  },
-
-  update_display: function(){
   }
 };

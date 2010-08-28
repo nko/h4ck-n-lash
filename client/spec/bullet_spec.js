@@ -17,7 +17,7 @@ describe('Bullet', function(){
       var start_position = bullet.position;
       game.next_tick();
       var end_position = bullet.position;
-      expect(bullet.position.x).toEqual( BULLET_VELOCITY );
+      expect(bullet.position.x).toEqual( AVATAR_WIDTH / 2 + BULLET_VELOCITY );
     });
 
     it('should have an html source containing the top and left positions', function() {
