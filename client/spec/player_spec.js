@@ -10,7 +10,7 @@ describe("Player", function() {
     });
 
     it("should ask for a name", function() {
-      expect(player.get_name()).toEqual('Sam');
+      expect(player.name).toEqual('Sam');
     });
 
     it("should announce the player entry event to the Game", function() {
