@@ -48,6 +48,11 @@ Avatar.prototype = {
     this.position.x = new_x;
     this.position.y += this.velocity.y;
 
+    if( this.position.y > (this.game.current_level.height - AVATAR_HEIGHT)){
+      this.position.y = this.game.current_level.height - AVATAR_HEIGHT;
+      this.velocity.y = 0;
+    }
+
     // apply friction
     if(!this.move.left && !this.move.right) {
       this.velocity.x *= AVATAR_FRICTION;

@@ -8,6 +8,7 @@ var Level = function(level_id) {
     self.name = 'prototype';
     self.html = level0html;
     self.width = 960;
+    self.height = 600;
     return self;
   };
 
