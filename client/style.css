@@ -10,7 +10,7 @@ body {
   margin-top: 30px;
   margin-left: 0px;
   position: absolute;
-  overflow:hidden;
+  overflow: hidden;
 }
 #sprite-container {
   position: absolute;
@@ -71,6 +71,16 @@ body {
 	bottom:0;
 }
 
+#hud #instructions{
+  color: #fff;
+	position: fixed;
+	width:126px;
+	height:63px;
+	right:0;
+	bottom:50;
+  text-align: right;
+  padding-right: 10px;
+}
 .bullet {
   position:absolute;
   top:0;
