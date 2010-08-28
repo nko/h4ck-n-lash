@@ -30,6 +30,10 @@ Avatar.prototype = {
     if(this.move.right) this.accelerate_right();
     //deal with gravity
     this.velocity.y += GRAVITY;
+    if(Math.abs(this.velocity.y) >= MAX_Y_VELOCITY){
+      var direction = this.velocity.y > 0 ? 1 : -1;
+      this.velocity.y = MAX_Y_VELOCITY * direction;
+    }
 
     // update position
     var new_x = this.position.x + this.velocity.x;

@@ -14,6 +14,7 @@ Player.prototype = {
   initialize_keyboard_bindings : function(){
     var self = this;
     $(document).keydown(function(event){
+        console.log(event.keyCode);
       switch (event.keyCode){
         case Config.key_codes.left:
           self.avatar.move.left= true;
@@ -23,7 +24,7 @@ Player.prototype = {
           self.avatar.move.right = true;
           self.avatar.move.left= false;
           return false;
-        case Config.key_codes.up:
+        case Config.key_codes.jump:
           self.avatar.accelerate_up();
           return false;
       }

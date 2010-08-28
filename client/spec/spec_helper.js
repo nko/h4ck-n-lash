@@ -18,10 +18,22 @@ function simulate_up_key_press() {
   $game_container.trigger(event);
 }
 
+function simulate_jump_key_press() {
+  var event = jQuery.Event('keydown');
+  event.keyCode = Config.key_codes.jump;
+  $game_container.trigger(event);
+}
+
 function simulate_down_key_press() {
   var event = jQuery.Event('keydown');
   event.keyCode = Config.key_codes.down;
   $game_container.trigger(event);
+}
+
+function repeat( number_of_times, callback ) {
+  for( var x=0; x < number_of_times; x++ ) {
+    callback.call();
+  }
 }
 
 beforeEach(function() {

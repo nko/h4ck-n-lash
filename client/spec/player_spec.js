@@ -79,9 +79,9 @@ describe("Player", function() {
 
     });
 
-    describe("on up arrow", function() {
+    describe("on jump", function() {
       beforeEach(function() {
-        simulate_up_key_press();
+        simulate_jump_key_press();
       });
       
       it('should change velocity on keydown', function(){

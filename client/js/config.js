@@ -1,5 +1,8 @@
 ONE_GAME_TICK = 50;
+
 GRAVITY=.3;
+MAX_Y_VELOCITY = 30;
+
 AVATAR_WIDTH = 95;
 AVATAR_HEIGHT = 90;
 AVATAR_RUN_ACCEL = 3;
@@ -10,8 +13,9 @@ Config = {
   key_codes : {
     left: 37,
     right: 39,
-    up:38,
-    down: 40
+    up: 38,
+    down: 40,
+    jump: 70
   }
 };
 

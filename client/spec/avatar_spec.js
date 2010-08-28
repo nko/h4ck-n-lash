@@ -12,6 +12,12 @@ describe('Avatar', function() {
       avatar.accelerate_up();
       expect(avatar.velocity.y).toEqual(AVATAR_JUMP_ACCEL);
     });
+    it("velocity.y should not exceed the max", function() {
+      expect(avatar.velocity.y).toEqual(0);
+      repeat(10, function() { avatar.accelerate_up(); });
+      game.next_tick();
+      expect(avatar.velocity.y).toEqual(-1 * MAX_Y_VELOCITY);
+    });
   });
   describe('gravity', function() {
     it("every game tick should add to velocity.y", function() {
@@ -20,6 +26,11 @@ describe('Avatar', function() {
       expect(avatar.velocity.y).toEqual(GRAVITY);
       jasmine.Clock.tick(ONE_GAME_TICK);
       expect(avatar.velocity.y).toEqual(GRAVITY * 2);
+    });
+    it("velocity.y should not exceed the max", function() {
+      expect(avatar.velocity.y).toEqual(0);
+      jasmine.Clock.tick(ONE_GAME_TICK * 1000);
+      expect(avatar.velocity.y).toEqual(MAX_Y_VELOCITY);
     });
   });
 
