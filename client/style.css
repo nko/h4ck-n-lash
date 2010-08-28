@@ -79,12 +79,13 @@ body {
 
 #rdtube {
   position: absolute;
-  top: 340px;
+  top: 290px;
   left: 870px;
-  background: black;
   color: green;
 }
 
 .tube {
-  background: url('sprites/tube.png');
+  background: url('sprites/warp_tube.png');
+  height:90px;
+  width: 90px;
 }
