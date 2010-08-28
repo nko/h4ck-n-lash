@@ -28,6 +28,7 @@ beforeEach(function() {
   ONE_GAME_TICK = 50;
   $game_container =  $('body');
   jasmine.Clock.useMock();
+  $('#jasmine_content').empty();
   this.addMatchers({
     toBePlaying: function(expectedSong) {
       var player = this.actual;

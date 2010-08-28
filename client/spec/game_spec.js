@@ -24,14 +24,13 @@ describe("Game", function() {
   });
 
   it("should build the board after player name and level are loaded", function(){
-    var before_html = $('#jasmine_content').html();
+    expect($('#jasmine_content #level-container .tube').length).toEqual(0);
     game = new Game();
     player = new Player();
-    var after_html = $('#jasmine_content').html();
     expect(game.sprites).toBeDefined();
     expect(game.sprites.length).toBeGreaterThan(0);
     expect(game.current_level).toBeDefined();
-    expect(after_html).toNotEqual(before_html); 
+    expect($('#jasmine_content #level-container .tube').length).toEqual(1);
   });
 
   describe('on next_tick', function(){
