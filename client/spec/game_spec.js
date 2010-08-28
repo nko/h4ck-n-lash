@@ -34,6 +34,7 @@ describe("Game", function() {
 
   it('should start a game loop', function() {
     spyOn(game, 'next_tick').andCallThrough();
+    game.start();
     jasmine.Clock.tick(ONE_GAME_TICK );    
     expect(game.next_tick.calls.length).toBe(1);
     jasmine.Clock.tick(ONE_GAME_TICK);    
@@ -44,6 +45,7 @@ describe("Game", function() {
 
   it('should be possible to stop the game loop', function() {
     spyOn(game, 'next_tick').andCallThrough();
+    game.start();
     jasmine.Clock.tick(ONE_GAME_TICK );    
     jasmine.Clock.tick(ONE_GAME_TICK );    
     expect(game.next_tick.calls.length).toBe(2);
@@ -59,23 +61,24 @@ describe("Game", function() {
       describe("moves the .avatar div", function(){
         beforeEach(function(){
           game = new Game();
-          player = new Player();
+          player = new Player({position:{x:200,y:200}});
+          avatar = player.avatar;
           game.next_tick();
         });    
   
         it('should move left when player presses left', function(){
-          var before_position = $('.avatar').css('left');
+          var before_position = $(avatar.dom_element).css('left');
           simulate_left_key_press();
           game.next_tick();
-          var after_position = $('.avatar').css('left');
+          var after_position = $(avatar.dom_element).css('left');
           expect(before_position).toBeGreaterThan(after_position);
         });
 
         it('should move right when player presses right', function(){
-          var before_position = $('.avatar').css('left');
+          var before_position = $(avatar.dom_element).css('left');
           simulate_right_key_press();
           game.next_tick();
-          var after_position = $('.avatar').css('left');
+          var after_position = $(avatar.dom_element).css('left');
           expect(before_position).toBeLessThan(after_position);
         });
 

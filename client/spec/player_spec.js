@@ -37,14 +37,16 @@ describe("Player", function() {
  describe('Player Controls', function(){ 
     beforeEach(function() {
       game = new Game();
+      game.start();
       starting_position = {x:200,y:200};
-      player = new Player({position:starting_position});
+      player = new Player({position:{x:starting_position.x, y:starting_position.y}});
+      avatar = player.avatar;
     });
     describe('not pressing any arrow keys', function(){
       it('should eventaully return x velocity to 0', function(){
-        player.avatar.velocity.x = 5;
+        avatar.velocity.x = 5;
         jasmine.Clock.tick( ONE_GAME_TICK*50 );
-        expect(player.avatar.velocity.x).toEqual(0);
+        expect(avatar.velocity.x).toEqual(0);
       });
     });
     describe("presses left arrow", function() {
@@ -54,11 +56,11 @@ describe("Player", function() {
       });
       
       it('should change velocity on keydown', function(){
-        expect(player.avatar.velocity.x).toEqual(-AVATAR_RUN_ACCEL);
+        expect(avatar.velocity.x).toEqual(-AVATAR_RUN_ACCEL);
       });
 
       it('should move left', function(){
-        expect(player.avatar.position.x).toEqual(starting_position.x-AVATAR_RUN_ACCEL);
+        expect(avatar.position.x).toEqual(starting_position.x-AVATAR_RUN_ACCEL);
       });
     });
     describe("presses right arrow", function() {
@@ -68,11 +70,11 @@ describe("Player", function() {
       });
       
       it('should change velocity on keydown', function(){
-        expect(player.avatar.velocity.x).toEqual(AVATAR_RUN_ACCEL);
+        expect(avatar.velocity.x).toEqual(AVATAR_RUN_ACCEL);
       });
 
       it('should move right', function(){
-        expect(player.avatar.position.x).toEqual(AVATAR_RUN_ACCEL);
+        expect(avatar.position.x).toEqual(starting_position.x+AVATAR_RUN_ACCEL);
       });
 
     });
@@ -83,12 +85,12 @@ describe("Player", function() {
       });
       
       it('should change velocity on keydown', function(){
-        expect(player.avatar.velocity.y).toEqual(AVATAR_JUMP_ACCEL);
+        expect(avatar.velocity.y).toEqual(AVATAR_JUMP_ACCEL);
       });
 
       it('should move up', function(){
         game.next_tick();
-        expect(player.avatar.position.y).toEqual(AVATAR_JUMP_ACCEL + GRAVITY);
+        expect(avatar.position.y).toEqual(starting_position.y + AVATAR_JUMP_ACCEL + GRAVITY);
       });
 
     });

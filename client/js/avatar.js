@@ -2,13 +2,13 @@ Avatar = function(options){
   this.id = Math.random();
   this.name = options.name || 'anonymous';
   this.position = options.position || {x:0,y:0};
-  console.log('avatar position',this.position);
+
   this.move = {
     left: false,
     right: false
   };
   this.velocity = {x:0, y:0};
-  this.dom_element = $('<div id="avatar-'+this.id+'" class="avatar"><div class="avatar-name">'+this.name+'</div></div>') 
+  this.dom_element = $('<div id="avatar-'+this.id+'" class="avatar"><div class="avatar-name">'+this.name+'</div></div>');
 };
 
 Avatar.prototype = {
@@ -33,8 +33,14 @@ Avatar.prototype = {
 
     // update position
     var new_x = this.position.x + this.velocity.x;
-    if(new_x < 0) new_x = 0;
-    if(new_x > this.game.width - AVATAR_WIDTH) new_x = this.game.width - AVATAR_WIDTH;
+    if(new_x < 0) {
+      new_x = 0;
+      this.velocity.x = 0;
+    }
+    if(new_x > this.game.current_level.width - AVATAR_WIDTH) {
+      new_x = this.game.current_level.width - AVATAR_WIDTH;
+      this.velocity.x = 0;
+    }
     this.position.x = new_x;
     this.position.y += this.velocity.y;
 

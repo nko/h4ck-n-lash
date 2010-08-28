@@ -4,6 +4,7 @@ describe('Avatar', function() {
     game = new Game();
     player = new Player('fred');
     avatar = player.avatar;
+    game.start();
   });
   
   describe('accelerate_up', function() {
@@ -25,17 +26,16 @@ describe('Avatar', function() {
   describe('collision detection', function(){
     describe('game boundaries', function(){
       it('should not move off left side of screen', function(){
-        player.position.x = 0;
+        avatar.position.x = 0;
         simulate_left_key_press();
         game.next_tick();
-        expect(player.position.x).toEqual(0);
+        expect(avatar.position.x).toEqual(0);
       });
       it('should not move off right side of screen', function(){
-        game.width = 500;
-        player.position.x = game.width - AVATAR_WIDTH;
+        avatar.position.x = game.current_level.width - AVATAR_WIDTH;
         simulate_right_key_press();
         game.next_tick();
-        expect(player.position.x).toEqual(game.width - AVATAR_WIDTH);
+        expect(avatar.position.x).toEqual(game.current_level.width - AVATAR_WIDTH);
       });
 
     });
