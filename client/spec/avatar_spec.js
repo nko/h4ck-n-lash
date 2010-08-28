@@ -1,10 +1,6 @@
 describe('Avatar', function() {
   var player, avatar;
   
-  beforeEach(function(){
-    spyOn(window, 'prompt').andReturn('Sam');
-  });
-
   describe('accelerate_up', function() {
     beforeEach(function() {
       player = new Player('fred');

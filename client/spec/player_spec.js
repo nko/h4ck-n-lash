@@ -3,7 +3,6 @@ describe("Player", function() {
 
   describe("when a player is created", function() {
     beforeEach(function() {
-      spyOn(window, 'prompt').andReturn('Sam');
       if(game) $game_container.unbind('player.entry');
       game = new Game();
       player = new Player();
@@ -31,7 +30,6 @@ describe("Player", function() {
   });
  describe('Player Controls', function(){ 
     beforeEach(function() {
-      spyOn(window, 'prompt').andReturn('Sam');
       game = new Game();
       player = new Player();
     });

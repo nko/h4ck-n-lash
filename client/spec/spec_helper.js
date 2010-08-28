@@ -25,9 +25,9 @@ function simulate_down_key_press() {
 }
 
 beforeEach(function() {
-  ONE_GAME_TICK = 50;
   $game_container =  $('body');
   jasmine.Clock.useMock();
+  jasmine.Clock.reset();
   $('#jasmine_content').empty();
   this.addMatchers({
     toBePlaying: function(expectedSong) {

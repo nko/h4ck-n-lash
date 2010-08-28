@@ -20,3 +20,4 @@ if (!window.console )
       
 }
 
+ONE_GAME_TICK = 50;

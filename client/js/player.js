@@ -1,6 +1,6 @@
 var Player = function( options ) {
   options = options || {};
-	options.name = options.name || prompt('What is your name?');
+	options.name = options.name || "anonymous";
 
   this.avatar = new Avatar({name:options.name});
 

@@ -1,8 +1,7 @@
 describe("Game", function() {
-  var game=null, player;
+  var game, player;
 
   beforeEach(function(){
-    spyOn(window, 'prompt').andReturn('Sam');
     if(game) $game_container.unbind('player.entry');
     game = new Game();
     player = new Player();
@@ -32,6 +31,17 @@ describe("Game", function() {
     expect(game.current_level).toBeDefined();
     expect($('#jasmine_content #level-container .tube').length).toEqual(1);
   });
+
+  it('should start a game loop', function() {
+    spyOn(game, 'next_tick').andCallThrough();
+    jasmine.Clock.tick(ONE_GAME_TICK );    
+    expect(game.next_tick.calls.length).toBe(1);
+    jasmine.Clock.tick(ONE_GAME_TICK);    
+    jasmine.Clock.tick(ONE_GAME_TICK);    
+    jasmine.Clock.tick(ONE_GAME_TICK);    
+    expect(game.next_tick.calls.length).toBe(4);
+  });
+
 
   describe('on next_tick', function(){
     describe('refresh_display',function(){

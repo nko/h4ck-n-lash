@@ -19,15 +19,16 @@ var Game = function() {
     $('#level-container').html(self.current_level.html);
     self.next_tick();
   };
+  self.next_tick = function(){
+    self.update_sprites();
+    self.refresh_display();
+  };
+  setInterval(function() { self.next_tick(); }, ONE_GAME_TICK);
   
   return self;
 }
 
 Game.prototype = {
-  next_tick: function(){
-    this.update_sprites();
-    this.refresh_display();
-  },
   update_sprites: function(){
     $.each(this.sprites,function( i, sprite){
       sprite.update_position();
