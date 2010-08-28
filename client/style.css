@@ -47,6 +47,26 @@ body {
   border: 1px solid #000000;
 }
 
+#hud #hud-twitter {
+	position: fixed;
+	background-image: url('/images/twitter.png');
+	background-position: top left;
+	width:126px;
+	height:57px;
+	right:0;
+	bottom:63px;
+}
+
+#hud #hud-voteko {
+	position: fixed;
+	background-image: url('/images/voteko.png');
+	background-position: top left;
+	width:126px;
+	height:63px;
+	right:0;
+	bottom:0;
+}
+
 .floor {
   background: url('/sprites/brick.png');
   z-index: 10;
