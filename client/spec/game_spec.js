@@ -42,6 +42,17 @@ describe("Game", function() {
     expect(game.next_tick.calls.length).toBe(4);
   });
 
+  it('should be possible to stop the game loop', function() {
+    spyOn(game, 'next_tick').andCallThrough();
+    jasmine.Clock.tick(ONE_GAME_TICK );    
+    jasmine.Clock.tick(ONE_GAME_TICK );    
+    expect(game.next_tick.calls.length).toBe(2);
+    game.pause();
+    jasmine.Clock.tick(ONE_GAME_TICK );    
+    jasmine.Clock.tick(ONE_GAME_TICK );    
+    expect(game.next_tick.calls.length).toBe(2);
+  });
+
 
   describe('on next_tick', function(){
     describe('refresh_display',function(){
@@ -49,6 +60,7 @@ describe("Game", function() {
         beforeEach(function(){
           game = new Game();
           player = new Player();
+          game.next_tick();
         });    
   
         it('should move left when player presses left', function(){

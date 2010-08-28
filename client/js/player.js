@@ -1,8 +1,9 @@
 var Player = function( options ) {
   options = options || {};
 	options.name = options.name || "anonymous";
+  
 
-  this.avatar = new Avatar({name:options.name});
+  this.avatar = new Avatar(options);
 
   this.initialize_keyboard_bindings();
 

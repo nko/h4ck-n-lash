@@ -23,6 +23,12 @@ describe("Player", function() {
     it('should start in position 0', function() {
       expect(player.avatar.position.x).toEqual(0);
     });
+
+    it("should be possible to define the initial position", function() {
+        player = new Player({position: {x:360, y:550}});
+        expect(player.avatar.position.x).toEqual(360);
+        expect(player.avatar.position.y).toEqual(550);
+   });
    
     it("should display the player's name in #hello div", function() {
       $('#jasmine_content').html('<div id="hello"></div>');
@@ -70,20 +76,18 @@ describe("Player", function() {
 
     });
 
-    describe("on_up_arrow", function() {
+    describe("on up arrow", function() {
       beforeEach(function() {
-        var event = jQuery.Event('keydown');
-        event.keyCode = Config.key_codes.up;
-        $game_container.trigger(event);
+        simulate_up_key_press();
       });
       
       it('should change velocity on keydown', function(){
-        expect(player.avatar.velocity.y).toEqual(1);
+        expect(player.avatar.velocity.y).toEqual(AVATAR_JUMP_ACCEL);
       });
 
       it('should move up', function(){
         game.next_tick();
-        expect(player.avatar.position.y).toEqual(1);
+        expect(player.avatar.position.y).toEqual(AVATAR_JUMP_ACCEL + GRAVITY);
       });
 
     });

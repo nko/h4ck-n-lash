@@ -17,13 +17,18 @@ var Game = function() {
   self.build_display = function(){
     //load level
     $('#level-container').html(self.current_level.html);
-    self.next_tick();
+    //self.next_tick();
   };
   self.next_tick = function(){
     self.update_sprites();
     self.refresh_display();
   };
-  setInterval(function() { self.next_tick(); }, ONE_GAME_TICK);
+
+  var loopTimer = setInterval(function() { self.next_tick(); }, ONE_GAME_TICK);
+
+  self.pause = function() {
+    clearInterval(loopTimer);
+  };
   
   return self;
 }
