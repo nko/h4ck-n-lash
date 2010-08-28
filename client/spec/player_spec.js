@@ -5,7 +5,7 @@ describe("Player", function() {
     beforeEach(function() {
       if(game) $game_container.unbind('player.entry');
       game = new Game();
-      player = new Player();
+      player = new Player({name: 'Sam'});
     });
 
     it("should ask for a name", function() {
