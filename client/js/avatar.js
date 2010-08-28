@@ -5,10 +5,14 @@ Avatar = function(){
 
 Avatar.prototype = {
   
-  accelerate_left : function(val){
+  accelerate_left : function(){
     this.velocity.x--; 
   },
-  
+
+  accelerate_right: function(){
+    this.velocity.x++; 
+  },
+ 
   update_position : function(){
     this.position.x += this.velocity.x;
   } 

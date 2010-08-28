@@ -13,10 +13,13 @@ Player.prototype = {
   initialize_keyboard_bindings : function(){
     var self = this;
     $(document).keydown(function(event){
-      
-      if(event.keyCode == Config.key_codes.left){
-        self.avatar.accelerate_left(1);
-        return false;
+      switch (event.keyCode){
+        case Config.key_codes.left:
+          self.avatar.accelerate_left();
+          return false;
+        case Config.key_codes.right:
+          self.avatar.accelerate_right();
+          return false;
       }
     });
   }
