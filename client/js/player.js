@@ -26,6 +26,11 @@ Player.prototype = {
         case Config.key_codes.jump:
           self.avatar.accelerate_up();
           return false;
+        case Config.key_codes.shoot:
+          var shoot_event = jQuery.Event('player.shoot');
+          shoot_event.player = self;
+          $('body').trigger(shoot_event);
+          return false;
       }
     });
     $(document).keyup(function(event){

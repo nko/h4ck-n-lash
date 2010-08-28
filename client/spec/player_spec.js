@@ -3,7 +3,6 @@ describe("Player", function() {
 
   describe("when a player is created", function() {
     beforeEach(function() {
-      if(game) $game_container.unbind('player.entry');
       game = new Game();
       player = new Player({name: 'Sam'});
     });
@@ -93,6 +92,13 @@ describe("Player", function() {
         expect(avatar.position.y).toEqual(200+AVATAR_JUMP_ACCEL + GRAVITY);
       });
 
+    });
+    describe("on fire", function() {
+      it("should add a bullet to the game", function() {
+        expect(game.bullets.length).toEqual(0);
+        simulate_shoot_key_press();
+        expect(game.bullets.length).toEqual(1);
+      });
     });
   });
 });

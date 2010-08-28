@@ -2,6 +2,8 @@ var Game = function() {
   var self = this;
   self.sprites = [];
   self.platforms = [];
+  self.bullets = [];
+
   self.on_player_entry = function(ev) {
   	$('#hello').html('Hello, '+ev.player.name);
     ev.player.avatar.game = self;
@@ -10,6 +12,12 @@ var Game = function() {
     self.build_display();
   };
   $('body').bind('player.entry', self.on_player_entry );
+
+  self.on_player_shoot = function(ev){
+    var bullet = new Bullet(ev.player);
+    self.bullets.push(bullet);
+  };
+  $('body').bind('player.shoot', self.on_player_shoot)
 
   self.get_level = function(level_id){
     if(!level_id) level_id = null;

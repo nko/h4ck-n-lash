@@ -2,7 +2,6 @@ describe("Game", function() {
   var game, player;
 
   beforeEach(function(){
-    if(game) $game_container.unbind('player.entry');
     game = new Game();
     player = new Player();
     $('#jasmine_content').html('<div id="level-container"></div><div id="sprite-container"></div>');
