@@ -17,11 +17,7 @@ var Game = function() {
   self.build_display = function(){
     //load level
     $('#level-container').html(self.current_level.html);
-    //load sprite and put name above it
-    $('#sprite-container').html('');
-    $(self.sprites).each(function(index, value) {
-      $('#sprite-container').append('<div class="avatar"><div class="avatar-name">'+value.name+'</div></div>'); 
-    });
+    self.next_tick();
   };
   
   return self;
@@ -30,10 +26,18 @@ var Game = function() {
 Game.prototype = {
   next_tick: function(){
     this.update_sprites();
+    this.refresh_display();
   },
   update_sprites: function(){
     $.each(this.sprites,function( i, sprite){
       sprite.update_position();
+    });
+  },
+  refresh_display: function() {
+    $('#sprite-container').html('');
+    $.each(this.sprites,function( i, sprite){
+      sprite.update_display(); 
+      $('#sprite-container').append(sprite.dom_element); 
     });
   }
 };

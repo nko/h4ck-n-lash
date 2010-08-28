@@ -1,18 +1,16 @@
 describe("Player", function() {
   var player, game=null, avatar;
-  var $game_container;
 
   describe("when a player is created", function() {
     beforeEach(function() {
       spyOn(window, 'prompt').andReturn('Sam');
-      if(game) $('body').unbind('player_entry');
+      if(game) $game_container.unbind('player.entry');
       game = new Game();
       player = new Player();
-      $game_container =  $('body');
     });
 
     it("should ask for a name", function() {
-      expect(player.name).toEqual('Sam');
+      expect(player.get_name()).toEqual('Sam');
     });
 
     it("should announce the player entry event to the Game", function() {
@@ -36,16 +34,11 @@ describe("Player", function() {
       spyOn(window, 'prompt').andReturn('Sam');
       game = new Game();
       player = new Player();
-
-      $game_container =  $('body');
     });
 
-    describe("onLeftArrow", function() {
+    describe("presses left arrow", function() {
       beforeEach(function() {
-        // simulate left
-        var event = jQuery.Event('keydown');
-        event.keyCode = Config.key_codes.left;
-        $game_container.trigger(event);
+        simulate_left_key_press();
       });
       
       it('should change velocity on keydown', function(){
@@ -58,12 +51,9 @@ describe("Player", function() {
       });
 
     });
-    describe("onRightArrow", function() {
+    describe("presses right arrow", function() {
       beforeEach(function() {
-        // simulate left
-        var event = jQuery.Event('keydown');
-        event.keyCode = Config.key_codes.right;
-        $game_container.trigger(event);
+        simulate_right_key_press();
       });
       
       it('should change velocity on keydown', function(){

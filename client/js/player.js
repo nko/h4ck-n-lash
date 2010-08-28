@@ -2,8 +2,7 @@ var Player = function( name ) {
 	this.name = name || prompt('What is your name?');
 	var entry_event = $.Event('player.entry');
 	entry_event.player = this;
-  this.avatar = new Avatar();
-  this.avatar.name = this.name;
+  this.avatar = new Avatar({name:name});
 	$('body').trigger(entry_event);
 
   this.initialize_keyboard_bindings();
@@ -25,5 +24,8 @@ Player.prototype = {
           return false;
       }
     });
+  },
+ get_name: function(){
+    return this.avatar.name;
   }
 };
