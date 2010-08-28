@@ -37,13 +37,13 @@ describe("Player", function() {
  describe('Player Controls', function(){ 
     beforeEach(function() {
       game = new Game();
-      game.start();
       starting_position = {x:200,y:200};
-      player = new Player({position:{x:starting_position.x, y:starting_position.y}});
+      player = new Player({position:{x:200, y:200}});
       avatar = player.avatar;
     });
     describe('not pressing any arrow keys', function(){
       it('should eventaully return x velocity to 0', function(){
+        game.start();
         avatar.velocity.x = 5;
         jasmine.Clock.tick( ONE_GAME_TICK*50 );
         expect(avatar.velocity.x).toEqual(0);
@@ -80,17 +80,17 @@ describe("Player", function() {
     });
 
     describe("on jump", function() {
-      beforeEach(function() {
-        simulate_jump_key_press();
-      });
       
       it('should change velocity on keydown', function(){
+        simulate_jump_key_press();
         expect(avatar.velocity.y).toEqual(AVATAR_JUMP_ACCEL);
       });
 
       it('should move up', function(){
+        avatar.position.y = 200;
+        simulate_jump_key_press();
         game.next_tick();
-        expect(avatar.position.y).toEqual(starting_position.y + AVATAR_JUMP_ACCEL + GRAVITY);
+        expect(avatar.position.y).toEqual(200+AVATAR_JUMP_ACCEL + GRAVITY);
       });
 
     });

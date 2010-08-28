@@ -52,9 +52,15 @@ describe('Avatar', function() {
       });
       it('should not move off the bottom of the level', function(){
         avatar.position.y = game.current_level.height - AVATAR_HEIGHT;
-        console.log('avatar_y start', avatar.position.y);
         repeat(10, function(){ game.next_tick(); });
         expect(avatar.position.y).toEqual(game.current_level.height - AVATAR_HEIGHT);
+        expect(avatar.velocity.y).toEqual(0);
+      });
+      it('should not fall through platform', function(){
+        game.add_platform({x:0,y:300,x_end:400});
+        avatar.position = { x: 200, y:300 - AVATAR_HEIGHT};
+        game.next_tick();
+        expect(avatar.position.y).toEqual(300 - AVATAR_HEIGHT);
         expect(avatar.velocity.y).toEqual(0);
       });
     });

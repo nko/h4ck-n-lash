@@ -25,11 +25,14 @@ Avatar.prototype = {
   },
 
   update_position : function(){
+    var self = this;
     // update acceleration
     if(this.move.left) this.accelerate_left();
     if(this.move.right) this.accelerate_right();
+
     //deal with gravity
     this.velocity.y += GRAVITY;
+
     if(Math.abs(this.velocity.y) >= MAX_Y_VELOCITY){
       var direction = this.velocity.y > 0 ? 1 : -1;
       this.velocity.y = MAX_Y_VELOCITY * direction;
@@ -46,13 +49,28 @@ Avatar.prototype = {
       this.velocity.x = 0;
     }
     this.position.x = new_x;
+
+    var old_y = this.position.y;
     this.position.y += this.velocity.y;
 
     if( this.position.y > (this.game.current_level.height - AVATAR_HEIGHT)){
       this.position.y = this.game.current_level.height - AVATAR_HEIGHT;
       this.velocity.y = 0;
     }
-
+    var new_position_bottom = this.position.y + AVATAR_HEIGHT;
+    var old_position_bottom = old_y + AVATAR_HEIGHT;
+    $.each( this.game.platforms, function( i, platform){
+      console.log('old position', old_position_bottom);
+      console.log('new position', new_position_bottom);
+      console.log('x', self.position.x);
+      console.log('platform',platform);
+      if( old_position_bottom <= platform.y && new_position_bottom >= platform.y){
+        if( self.position.x > platform.x && self.position.x < platform.x_end){
+          self.position.y = platform.y - AVATAR_HEIGHT;
+          self.velocity.y = 0;
+        }
+      } 
+    });
     // apply friction
     if(!this.move.left && !this.move.right) {
       this.velocity.x *= AVATAR_FRICTION;

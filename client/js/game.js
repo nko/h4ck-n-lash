@@ -1,6 +1,7 @@
 var Game = function() {
   var self = this;
   self.sprites = [];
+  self.platforms = [];
   self.on_player_entry = function(ev) {
   	$('#hello').html('Hello, '+ev.player.name);
     ev.player.avatar.game = self;
@@ -47,5 +48,8 @@ Game.prototype = {
       sprite.update_display(); 
       $('#sprite-container').append(sprite.dom_element); 
     });
-  }
+  },
+  add_platform: function(platform) {
+    this.platforms.push(platform);
+  },
 };
