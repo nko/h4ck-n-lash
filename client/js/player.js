@@ -1,5 +1,5 @@
-var Player = function() {
-	this.name = prompt('What is your name?');
+var Player = function( name ) {
+	this.name = name || prompt('What is your name?');
 	var entry_event = $.Event('player.entry');
 	entry_event.player = this;
   this.avatar = new Avatar();
@@ -19,6 +19,9 @@ Player.prototype = {
           return false;
         case Config.key_codes.right:
           self.avatar.accelerate_right();
+          return false;
+        case Config.key_codes.up:
+          self.avatar.accelerate_up();
           return false;
       }
     });

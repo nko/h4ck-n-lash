@@ -77,5 +77,22 @@ describe("Player", function() {
 
     });
 
+    describe("on_up_arrow", function() {
+      beforeEach(function() {
+        var event = jQuery.Event('keydown');
+        event.keyCode = Config.key_codes.up;
+        $game_container.trigger(event);
+      });
+      
+      it('should change velocity on keydown', function(){
+        expect(player.avatar.velocity.y).toEqual(1);
+      });
+
+      it('should move up', function(){
+        game.next_tick();
+        expect(player.avatar.position.y).toEqual(1);
+      });
+
+    });
   });
 });
