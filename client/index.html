@@ -2,29 +2,26 @@
 <html>
   <head>
 	<title>Tube Warriors !!!!11</title>
+  <link type='text/css' rel='stylesheet' href='/style.css'/>
 	<script src="http://code.jquery.com/jquery-1.4.2.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="/js/config.js"></script>
   <script type="text/javascript" src="/js/avatar.js"></script>
 	<script src="/js/game.js" type="text/javascript"></script>
 	<script src="/js/player.js" type="text/javascript"></script>
+	<script src="js/level.js" type="text/javascript"></script>
 	<script type="text/javascript">
   $(function(){
     var game = new Game();
 		var player = new Player();
 	});
 	</script>
-    <style type="text/css">
-      body {
-        background-color: #000000;
-        color: #FFFFFF;
-        text-align: center;
-        font-size: 2em;
-      }
-    </style>
   </head>
   <body>
-    <h1>Tube Warriors</h1>
-    <p>an epic HTML5 video game, coming soon</p>
-    <p id="hello"></p>
+    <div id='level-container'>
+      <h1>Tube Warriors</h1>
+      <p>an epic HTML5 video game, coming soon</p>
+      <p id="hello"></p>
+    </div>
+    <div id='sprite-container'></div>
   </body>
 </html>

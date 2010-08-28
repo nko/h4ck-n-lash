@@ -1,15 +1,15 @@
 describe("Player", function() {
-  var player, game, avatar;
+  var player, game=null, avatar;
   var $game_container;
 
   describe("when a player is created", function() {
     beforeEach(function() {
       spyOn(window, 'prompt').andReturn('Sam');
+      if(game) $('body').unbind('player_entry');
       game = new Game();
       player = new Player();
       $game_container =  $('body');
     });
-    
 
     it("should ask for a name", function() {
       expect(player.name).toEqual('Sam');
@@ -23,9 +23,9 @@ describe("Player", function() {
       expect(player.avatar).toBeDefined();
     });
 
-    xit("should display the player's name in #hello div", function() {
-      $('#jasmine_content').html('<div id="hello"></div>');
     
+    it("should display the player's name in #hello div", function() {
+      $('#jasmine_content').html('<div id="hello"></div>');
     });
   });
   

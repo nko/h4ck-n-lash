@@ -9,9 +9,41 @@ body {
   margin-left: 0px;
   border: 1px red solid;
 }
+#sprite-container {
+  position: absolute;
+  height: 600px;
+  width: 960px;
+  margin-top: 30px;
+  margin-left: 0px;
+  z-index=1000;
+  top: 0;
+  left: 0;
+}
+#sprite-container .avatar {
+  position: absolute;
+  background-image: url('/sprites/player_sprite.png');
+  background-position: 0px 0px;
+  width: 90px;
+  height: 95px;
+  overflow: hidden;
+  top: 460px;
+  left: 450px;
+
+}
+#sprite-container .avatar .avatar-name {
+  font-size: 8px;
+  height: 12px;
+  width: 50px;
+  overflow: hidden;
+  top: -10px;
+  left: -10px;
+  color: #ffffff;
+  background-color: #220000;
+  border: 1px solid #000000;
+}
 
 .floor {
-  background: url('sprites/brick.png');
+  background: url('/sprites/brick.png');
   z-index: 10;
 }
 
@@ -85,7 +117,7 @@ body {
 }
 
 .tube {
-  background: url('sprites/warp_tube.png');
+  background: url('/sprites/warp_tube.png');
   height:90px;
   width: 90px;
 }
