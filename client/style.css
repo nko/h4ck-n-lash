@@ -1,5 +1,7 @@
 body {
   background-color: black;
+  margin:0;
+  padding:0;
 }
 #level-container {
   background: #66ffff;
@@ -7,7 +9,8 @@ body {
   width: 960px;
   margin-top: 30px;
   margin-left: 0px;
-  border: 1px red solid;
+  position: absolute;
+  overflow:hidden;
 }
 #sprite-container {
   position: absolute;

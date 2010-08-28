@@ -4,11 +4,13 @@ var Level = function(level_id) {
   if(!level_id) level_id = 0;
   
   self.load_level = function(){
-    self.id = level_id;
-    self.name = 'prototype';
-    self.html = level0html;
-    self.width = 960;
-    self.height = 600;
+    new_level = level_0;
+    self.id = new_level.id;
+    self.name = new_level.name; 
+    self.html = new_level.html;
+    self.width = new_level.width;
+    self.height = new_level.height;
+    self.platforms = new_level.platforms;
     return self;
   };
 
@@ -16,4 +18,16 @@ var Level = function(level_id) {
   return self;
 }
 
-var level0html = " <div id='platform1' class='floor'></div> <div id='platform2' class='floor'></div> <div id='platform3' class='floor'></div> <div id='platform4' class='floor'></div> <div id='candy1' ><img src='/images/cheeseburger.jpg' height='200' width='150'/></div> <div id='candy2' >CLOUD</div> <div id='candy3' >CLOUD</div> <div id='candy4' >CLOUD</div> <div class='tube' id='rdtube' ></div>";
+var level_0 ={
+  id: 0,
+  name: 'prototype',
+  height:600,
+  width:960,
+  platforms:[
+    {y:580,x:0,x_end:960},
+    {y:400,x:0,x_end:300},
+    {y:380,x:770,x_end:960},
+    {y:180,x:400,x_end:600} 
+  ],
+  html:  " <div id='platform1' class='floor'></div> <div id='platform2' class='floor'></div> <div id='platform3' class='floor'></div> <div id='platform4' class='floor'></div> <div id='candy1' ><img src='/images/cheeseburger.jpg' height='200' width='150'/></div> <div id='candy2' >CLOUD</div> <div id='candy3' >CLOUD</div> <div id='candy4' >CLOUD</div> <div class='tube' id='rdtube' ></div>"
+};

@@ -43,7 +43,7 @@ Avatar.prototype = {
 
     // update position
     var new_x = this.position.x + this.velocity.x;
-    if(new_x < 0) {
+    if(new_x <= 0) {
       new_x = 0;
       this.velocity.x = 0;
     }
@@ -62,13 +62,9 @@ Avatar.prototype = {
     }
     var new_position_bottom = this.position.y + AVATAR_HEIGHT;
     var old_position_bottom = old_y + AVATAR_HEIGHT;
-    $.each( this.game.platforms, function( i, platform){
-      console.log('old position', old_position_bottom);
-      console.log('new position', new_position_bottom);
-      console.log('x', self.position.x);
-      console.log('platform',platform);
+    $.each( this.game.current_level.platforms, function( i, platform){
       if( old_position_bottom <= platform.y && new_position_bottom >= platform.y){
-        if( self.position.x > platform.x && self.position.x < platform.x_end){
+        if( self.position.x + AVATAR_WIDTH > platform.x && self.position.x < platform.x_end){
           self.position.y = platform.y - AVATAR_HEIGHT;
           self.velocity.y = 0;
         }

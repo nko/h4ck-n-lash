@@ -29,6 +29,7 @@ describe('Avatar', function() {
     });
     it("velocity.y should not exceed the max", function() {
       game.current_level.height = 100000000000000000000000;
+      game.current_level.platforms = [];
       expect(avatar.velocity.y).toEqual(0);
       jasmine.Clock.tick(ONE_GAME_TICK * 1000);
       expect(avatar.velocity.y).toEqual(MAX_Y_VELOCITY);

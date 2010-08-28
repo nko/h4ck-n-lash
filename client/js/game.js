@@ -60,6 +60,6 @@ Game.prototype = {
     $('#sprite-container').html(sprites_html.join(''));
   },
   add_platform: function(platform) {
-    this.platforms.push(platform);
+    this.current_level.platforms.push(platform);
   },
 };
