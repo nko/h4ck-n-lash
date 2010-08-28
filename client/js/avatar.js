@@ -1,12 +1,13 @@
 Avatar = function(options){
   this.id = Math.random();
   this.name = options.name || 'anonymous';
+  this.position = options.position || {x:0,y:0};
+  console.log('avatar position',this.position);
   this.move = {
     left: false,
     right: false
   };
   this.velocity = {x:0, y:0};
-  this.position = options.position || {x:0, y:0};
   this.dom_element = $('<div id="avatar-'+this.id+'" class="avatar"><div class="avatar-name">'+this.name+'</div></div>') 
 };
 
@@ -24,12 +25,17 @@ Avatar.prototype = {
   },
 
   update_position : function(){
+    // update acceleration
     if(this.move.left) this.accelerate_left();
     if(this.move.right) this.accelerate_right();
     //deal with gravity
     this.velocity.y += GRAVITY;
 
-    this.position.x += this.velocity.x;
+    // update position
+    var new_x = this.position.x + this.velocity.x;
+    if(new_x < 0) new_x = 0;
+    if(new_x > this.game.width - AVATAR_WIDTH) new_x = this.game.width - AVATAR_WIDTH;
+    this.position.x = new_x;
     this.position.y += this.velocity.y;
 
     // apply friction

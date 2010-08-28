@@ -37,7 +37,8 @@ describe("Player", function() {
  describe('Player Controls', function(){ 
     beforeEach(function() {
       game = new Game();
-      player = new Player();
+      starting_position = {x:200,y:200};
+      player = new Player({position:starting_position});
     });
     describe('not pressing any arrow keys', function(){
       it('should eventaully return x velocity to 0', function(){
@@ -57,7 +58,7 @@ describe("Player", function() {
       });
 
       it('should move left', function(){
-        expect(player.avatar.position.x).toEqual(-AVATAR_RUN_ACCEL);
+        expect(player.avatar.position.x).toEqual(starting_position.x-AVATAR_RUN_ACCEL);
       });
     });
     describe("presses right arrow", function() {

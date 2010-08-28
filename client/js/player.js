@@ -2,9 +2,7 @@ var Player = function( options ) {
   options = options || {};
 	options.name = options.name || "anonymous";
   
-
   this.avatar = new Avatar(options);
-
   this.initialize_keyboard_bindings();
 
 	var entry_event = $.Event('player.entry');

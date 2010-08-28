@@ -3,6 +3,7 @@ var Game = function() {
   self.sprites = [];
   self.on_player_entry = function(ev) {
   	$('#hello').html('Hello, '+ev.player.name);
+    ev.player.avatar.game = self;
     self.sprites.push(ev.player.avatar);
     self.current_level = self.get_level();
     self.build_display();
