@@ -9,6 +9,10 @@ AVATAR_RUN_ACCEL = 3;
 AVATAR_JUMP_ACCEL = -40;
 AVATAR_FRICTION = 0.3;
 
+BULLET_WIDTH = 5;
+BULLET_HEIGHT = 5;
+BULLET_VELOCITY = 35;
+
 Config = {
   key_codes : {
     left: 37,

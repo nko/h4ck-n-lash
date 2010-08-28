@@ -66,18 +66,18 @@ describe("Game", function() {
         });    
   
         it('should move left when player presses left', function(){
-          var before_position = $(avatar.dom_element).css('left');
+          var before_position = $(avatar.html).css('left');
           simulate_left_key_press();
           game.next_tick();
-          var after_position = $(avatar.dom_element).css('left');
+          var after_position = $(avatar.html).css('left');
           expect(before_position).toBeGreaterThan(after_position);
         });
 
         it('should move right when player presses right', function(){
-          var before_position = $(avatar.dom_element).css('left');
+          var before_position = $(avatar.html).css('left');
           simulate_right_key_press();
           game.next_tick();
-          var after_position = $(avatar.dom_element).css('left');
+          var after_position = $(avatar.html).css('left');
           expect(before_position).toBeLessThan(after_position);
         });
 

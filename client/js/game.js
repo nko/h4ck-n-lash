@@ -16,6 +16,7 @@ var Game = function() {
   self.on_player_shoot = function(ev){
     var bullet = new Bullet(ev.player);
     self.bullets.push(bullet);
+    self.sprites.push(bullet);
   };
   $('body').bind('player.shoot', self.on_player_shoot)
 
@@ -54,7 +55,7 @@ Game.prototype = {
     $('#sprite-container').html('');
     $.each(this.sprites,function( i, sprite){
       sprite.update_display(); 
-      $('#sprite-container').append(sprite.dom_element); 
+      $('#sprite-container').append(sprite.html); 
     });
   },
   add_platform: function(platform) {

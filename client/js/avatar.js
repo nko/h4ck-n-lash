@@ -8,11 +8,14 @@ Avatar = function(options){
     right: false
   };
   this.velocity = {x:0, y:0};
-  this.dom_element = $('<div id="avatar-'+this.id+'" class="avatar"><div class="avatar-name">'+this.name+'</div></div>');
+
 };
 
 Avatar.prototype = {
-  
+  get html() {
+    return '<div id="avatar-'+this.id+'" class="avatar" style="top:'+this.position.y+'px;left:'+this.position.x+'px;"><div class="avatar-name">'+this.name+'</div></div>';
+  },
+
   accelerate_left : function(){
     this.velocity.x -= AVATAR_RUN_ACCEL; 
   }, 
@@ -79,6 +82,5 @@ Avatar.prototype = {
   },
 
   update_display: function(){
-    $(this.dom_element).css({top:this.position.y, left:this.position.x});
   }
 };

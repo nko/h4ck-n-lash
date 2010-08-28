@@ -68,6 +68,20 @@ body {
 	bottom:0;
 }
 
+.bullet {
+  position:absolute;
+  top:0;
+  left:0;
+  width:12px;
+  height:12px;
+  overflow:hidden;
+  color: red;
+  background-color: red;
+  border: 1px solid black;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+
 .floor {
   background: url('/sprites/brick.png');
   z-index: 10;
