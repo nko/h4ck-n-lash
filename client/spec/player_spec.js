@@ -1,5 +1,5 @@
 describe("Player", function() {
-  var player, game;
+  var player, game, avatar;
   var $game_container;
 
   describe("when a player is created", function() {
@@ -19,10 +19,48 @@ describe("Player", function() {
       expect(game.sprites.length).toEqual(1);
     });
 
+    it("should have an avatar", function() {
+      expect(player.avatar).toBeDefined();
+    });
+
     xit("should display the player's name in #hello div", function() {
       $('#jasmine_content').html('<div id="hello"></div>');
     
     });
   });
   
+  describe("onLeftArrow", function() {
+    beforeEach(function() {
+      spyOn(window, 'prompt').andReturn('Sam');
+      game = new Game();
+      player = new Player();
+
+      $game_container =  $('body');
+
+      // simulate left
+      var event = jQuery.Event('keydown');
+      event.keyCode = Config.key_codes.left;
+      $game_container.trigger(event);
+
+
+    });
+    
+    it('should change velocity on keydown', function(){
+      expect(player.avatar.velocity.x).toEqual(-1);
+    });
+
+    it('should start in position 0', function() {
+      expect(player.avatar.position.x).toEqual(0);
+    });
+
+    it('should move left', function(){
+//      jasmine.Clock.tick( ONE_GAME_TICK );
+      game.next_tick();
+      expect(player.avatar.position.x).toEqual(-1);
+    });
+
+
+
+    
+  });
 });
