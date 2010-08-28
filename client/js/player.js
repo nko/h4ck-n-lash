@@ -3,6 +3,7 @@ var Player = function() {
 	var entry_event = $.Event('player.entry');
 	entry_event.player = this;
   this.avatar = new Avatar();
+  this.avatar.name = this.name;
 	$('body').trigger(entry_event);
 
   this.initialize_keyboard_bindings();
