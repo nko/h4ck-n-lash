@@ -7,7 +7,7 @@ describe('Avatar', function() {
   });
   
   describe('accelerate_up', function() {
-    it('should subtract 1 from the velocity.y', function() {
+    it('should subtract from the velocity.y', function() {
       avatar.accelerate_up();
       expect(avatar.velocity.y).toEqual(AVATAR_JUMP_ACCEL);
     });
