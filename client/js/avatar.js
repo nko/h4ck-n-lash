@@ -1,6 +1,6 @@
 Avatar = function(options){
   this.id = Math.random();
-  this.name = options.name || '';
+  this.name = options.name || 'anonymous';
   this.velocity = {x:0, y:0};
   this.position = {x:0,y:0};
   this.dom_element = $('<div id="avatar-'+this.id+'" class="avatar"><div class="avatar-name">'+this.name+'</div></div>') 
