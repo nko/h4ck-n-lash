@@ -5,26 +5,29 @@ var Game = function() {
   self.platforms = [];
   self.player_id = 0; //better if this is not undefined
 
-  self.socket = create_websocket('ws://'+window.location.hostname+':8001');
-
   self.on_player_entry = function(ev) {
     ev.player.avatar.game = self;
     self.player = ev.player;
     self.avatars[ev.player.name] = ev.player.avatar;
-    self.get_level();
   };
 
   $('body').bind('player.entry', self.on_player_entry );
 
   self.on_server_message = function(e,msg){
-    message = JSON.parse(msg);
-    if(message.event == 'player_id'){
+    var message = JSON.parse(msg);
+
+    if(message.event == 'player_connect'){
       self.player_id = message.id;
+      self.level_id = message.level_id;
+      console.log(message);
+      Level(message.level);
+
     } else if(message.event=='bullet'){
       self.create_bullet({position:message.bullet.position,owner_id: message.id, direction: message.bullet.direction});    
+
     } else if(message.event == 'die') {
-      console.log('avatar '+message.id+' got a die event');
       delete self.avatars[message.id];
+
     } else {
       message.game = self;
       if(self.avatars[message.id]) {
@@ -33,17 +36,21 @@ var Game = function() {
         self.avatars[message.id].life = message.life;
       } else {
         self.avatars[message.id] = new Avatar(message);
+
       }
     }
   };
 
   $('body').bind('ws_message',self.on_server_message);
+
+  self.socket = create_websocket('ws://'+window.location.hostname+':8001');
+
   self.on_player_shoot = function(ev){
     var position = {x: ev.player.avatar.position.x+AVATAR_WIDTH/2, y: ev.player.avatar.position.y+AVATAR_HEIGHT/3};
 
     var bullet = self.create_bullet({position:position, owner_id: self.player_id, direction:ev.player.avatar.direction});
 
-    self.socket.send(JSON.stringify({event:'bullet', id:self.player_id, bullet: bullet}));
+    self.socket.send(JSON.stringify({event:'bullet', id:self.player_id, level_id:self.level_id, bullet: bullet}));
   };
 
   $('body').bind('player.shoot', self.on_player_shoot)
@@ -61,6 +68,7 @@ var Game = function() {
   };
   
   self.on_level_loaded = function(ev){
+    console.log('level is loading', ev.level);
     self.current_level = ev.level;
     self.build_display();
     $('body').trigger(jQuery.Event('ready_to_start'));
@@ -74,14 +82,11 @@ var Game = function() {
     if(self.player.life <= 0){
       self.kill_player(ev.bullet.owner_id);
     };
+    ++self.player.hits;
+    self.socket.send(JSON.stringify({event: 'collision', id: self.player_id, level_id:self.level_id, owner_id: ev.bullet.owner_id}));
   };
    
   $('body').bind('bullet.collision', self.on_bullet_collision);
-  self.get_level = function(level_id){
-    if(!level_id) level_id = null;
-    level = new Level(level_id);
-    return level;
-  };
 
   self.build_display = function(){
     $('#level-container').html(self.current_level.html);
@@ -122,6 +127,7 @@ Game.prototype = {
       direction: this.player.avatar.direction,
       life: this.player.life 
       }));
+    this.socket.send( JSON.stringify({id:this.player_id,level_id:this.level_id,name:this.player.name,position:this.player.avatar.position, direction: this.player.avatar.direction}));
   },
   update_sprites: function(){
     $.each(this.avatars,function( i, avatar){
@@ -164,9 +170,11 @@ Game.prototype = {
 
     var game = this;
     $.each(this.bullets, function(i, bullet){
+      if(!bullet) return; 
       if(bullet.owner_id.toString() == game.player_id.toString()) {
         return;
       }
+
       var bpos =  {
         x: bullet.position.x,
         y: bullet.position.y,

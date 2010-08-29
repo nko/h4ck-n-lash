@@ -24,12 +24,29 @@ function repeat( number_of_times, callback ) {
 }
 
 beforeEach(function() {
-  real_ws_connection = window.create_websocket;
-  socket_spy = jasmine.createSpyObj('socket', ['send']);
-  spyOn(window, 'create_websocket').andReturn(socket_spy);
   $game_container =  $('body');
   $game_container.unbind('player.entry').unbind('player.shoot');
   $game_container.unbind('ws_message');
+
+  real_ws_connection = window.create_websocket;
+  socket_spy = jasmine.createSpyObj('socket', ['send']);
+  spyOn(window, 'create_websocket').andCallFake( function() {
+      $game_container.trigger('ws_message', JSON.stringify( {
+        level_id: 0,
+        player_id: 3,
+        level:{
+           id: 0,
+            name: 'prototype',
+            height:600,
+            width:960,
+            platforms:[{y:580,x:0,x_end:960},{y:400,x:0,x_end:300},{y:380,x:770,x_end:960},{y:180,x:400,x_end:600}],
+            html_file:'faked'
+        },
+        event: 'player_connect'
+      }));
+      return socket_spy;
+    }
+  );
   $(document).unbind('keydown');
   jasmine.Clock.useMock();
   jasmine.Clock.reset();
@@ -46,6 +63,7 @@ beforeEach(function() {
   spyOn($, 'ajax').andCallFake( function(args) {
     args.success('faked');
   });
+
 });
 function restore_websockets_code() {
   window.create_websocket = real_ws_connection;
