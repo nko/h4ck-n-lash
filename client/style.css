@@ -1,17 +1,18 @@
 body {
-  background-color: black;
+/*  background-color: black;*/
   margin:0;
   padding:0;
 }
 #game-container {
-  width:960px;
-  margin: 30px auto 0 auto;
+/*  width:960px;
+  margin: 30px auto 0 auto;*/
+  margin:0 auto;
   position: relative;
 }
 #level-container {
-  background: #66ffff;
+/*  background: #66ffff;
   height: 600px;
-  width: 960px;
+  width: 960px;*/
   margin: 0px;
   position: absolute;
   overflow: hidden;
@@ -19,8 +20,8 @@ body {
 #sprite-container {
   position: absolute;
   overflow: hidden;
-  height: 600px;
-  width: 960px;
+/*  height: 600px;
+  width: 960px;*/
   margin: 0px;
   z-index: 100;
   top: 0;
@@ -35,7 +36,6 @@ body {
   top: 460px;
   left: 450px;
   z-index: 100;
-
 }
 #sprite-container .avatar .avatar-name {
   font-size: 12px;
@@ -54,7 +54,6 @@ body {
   background-color: rgba(34, 0, 0, 0.5);
   border: 1px solid #000000;
 }
-
 #hud #hud-twitter {
 	position: fixed;
   z-index: 1337;
@@ -65,7 +64,6 @@ body {
 	right:0;
 	bottom:63px;
 }
-
 #hud #hud-voteko {
 	position: fixed;
   z-index: 1337;
@@ -76,7 +74,6 @@ body {
 	right:0;
 	bottom:0;
 }
-
 #hud #instructions{
   color: #fff;
   background-color: rgba(34, 34, 34, 0.8);

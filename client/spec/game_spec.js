@@ -8,27 +8,20 @@ describe("Game", function() {
   });
 
   it("should be able to return a level", function() {
-    var level = game.get_level(0);
-    expect(level.id).toEqual(0);
-    expect(level.name).toEqual('prototype');
-    expect(level.html).toBeDefined();
+    expect(game.current_level.id).toBeDefined();
+    expect(game.current_level.name).toBeDefined();
+    expect(game.current_level.html).toBeDefined();
   });
   
-  it("should be able to return a default level", function() {
-    var level = game.get_level();
-    expect(level.id).toEqual(0);
-    expect(level.name).toEqual('prototype');
-    expect(level.html).toBeDefined();
-  });
-
   it("should build the board after player name and level are loaded", function(){
-    expect($('#jasmine_content #level-container .tube').length).toEqual(0);
+    var before_html = $('#jasmine_content #level-container').html();
     game = new Game();
     player = new Player();
     expect(game.avatars).toBeDefined();
     expect(game.player).toBe(player);
     expect(game.current_level).toBeDefined();
-    expect($('#jasmine_content #level-container .tube').length).toEqual(1);
+    var after_html = $('#jasmine_content #level-container').html();
+    expect(before_html).toNotEqual(after_html);
   });
 
   it('should start a game loop', function() {

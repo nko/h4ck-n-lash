@@ -40,7 +40,12 @@ beforeEach(function() {
       return player.currentlyPlayingSong === expectedSong
           && player.isPlaying;
     }
-  })
+  });
+
+  xhrs = [];
+  spyOn($, 'ajax').andCallFake( function(args) {
+    args.success('faked');
+  });
 });
 function restore_websockets_code() {
   window.create_websocket = real_ws_connection;

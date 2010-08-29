@@ -11,7 +11,7 @@ var Game = function() {
     ev.player.avatar.game = self;
     self.player = ev.player;
     self.avatars[ev.player.name] = ev.player.avatar;
-    self.current_level = self.get_level();
+    self.get_level();
     self.build_display();
   };
 
@@ -33,6 +33,13 @@ var Game = function() {
     }, BULLET_TIMEOUT );
   };
   $('body').bind('player.shoot', self.on_player_shoot)
+
+  self.on_level_loaded = function(ev){
+    self.current_level = ev.level;
+    self.build_display();
+    $('body').trigger(jQuery.Event('ready_to_start'));
+  };
+  $('body').bind('level.loaded', self.on_level_loaded);
 
   self.get_level = function(level_id){
     if(!level_id) level_id = null;

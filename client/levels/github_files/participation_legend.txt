@@ -1,0 +1,1 @@
+Cannot GET /images/modules/dashboard/dossier/participation_legend.png

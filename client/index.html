@@ -17,7 +17,10 @@
   $(function(){
     game = new Game();
     player = new Player( {name: prompt('What is your name?'), position: {x:400 , y: 460}});
-    game.start();
+
+    $('body').bind('ready_to_start', function(ev){
+      game.start();
+    });
 	});
 	</script>
   </head>

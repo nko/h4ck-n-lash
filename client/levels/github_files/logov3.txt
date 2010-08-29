@@ -1,0 +1,1 @@
+Cannot GET /images/modules/header/logov3.png?changed
