@@ -2,7 +2,7 @@
 var game_offset = $('#game-container').offset();
 console.log(game_offset);
 var platforms = [];
-var selectors = 'ul.org-members li,ul.repositories li.public,.first,.last,#footer,#footer .sponsor,#footer .sosueme .main';
+var selectors = '.judge,h1,p,nav,.twitter .say';
 $(selectors).each(function(i,dom){
 	var offset = $(dom).offset();
 	var width = $(dom).width();

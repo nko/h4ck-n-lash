@@ -1,0 +1,633 @@
+/* AMP Default Site CSS */
+
+div.list_pager {
+		text-align: right;
+		width: 100%; 
+		font-size: 11px;
+        position:relative;
+		display: inline;
+		padding: 5px 5px 10px 5px;
+        clear:both;
+}
+
+div.list_pager a.pager_link {
+		font-family: Verdana, Arial, Helvetica, sans-serif; 
+        font-size: 9px;
+		margin-bottom: 5px;
+}
+  a.current_page_jump_link {
+      font-weight: bold;
+      font-size: 14px;
+  }
+
+.AMPComponent_hidden {
+		display: none;
+		margin-top: 10px;
+}
+
+.standout {
+		font-weight: bold;
+		text-decoration: none;
+		font-size:16px;
+}
+
+a.standout {
+		text-decoration: none;
+}
+
+img.image_frontpage {
+	border: 1px solid #000000;
+	margin: 4px;
+}
+.home img.img_main {
+	border: 1px solid #000000;
+	margin: 4px;
+}
+
+span.morelink {
+		margin-right: 10px;
+}
+
+span.udm_header {
+		display: block;
+		background-color: #E3E3E3;
+		padding: 5px;
+}
+
+.searchform_label, .searchform_element, .searchform_header, .searchform_table, .searchform_table input {
+		font-size: 11px;
+		text-decoration: none;
+		margin-left: 3px;
+		/*text-align:left;*/
+}
+
+
+form#udm_search span.go, form#udm_search input, form#udm_search select { 
+	vertical-align:top;
+}
+
+
+.searchform_table {
+	text-align: left;
+}
+
+
+.searchform_header {
+		font-size: 11px;
+		font-weight: bold;
+}
+
+td.list_entry {
+	width: 90%;
+}
+
+div.list_entry {
+	width: 90%;
+	padding-bottom: 1em;
+}
+
+.element_list_container {
+	border: 1px solid silver;
+	padding: 10px;
+}
+
+.sidebar_left {
+	width:25%;
+	padding:10px;
+	float:left; 
+	background-color:#999999; 
+	margin-top:0px; 
+	margin-left:10px; 
+	margin-right:10px;
+	margin-bottom:10px;
+}	
+
+.sidebar_right {
+	width:25%;
+	padding:10px;
+	float:right; 
+	background-color:#999999; 
+	margin-top:0px; 
+	margin-left:10px; 
+	margin-right:10px;
+	margin-bottom:10px;
+}	
+
+/* GALLERY MODULE */
+/* list of gallerys */
+.gallerylist { padding: 5px; text-align: left; }
+.gallerylist a { font-size: 14px; }
+.gallerylist img { float: left; margin: 8px; border: 1px solid #666; }
+.gallerylist br { clear: both; }
+.gallerylist p { display: inline; font-size: 12px; font-weight: normal; color: #666; padding-left: 10px; }
+.gallerylist p a { color: #f00; font-size: 100%;
+font-size: 11px; font-weight: normal; font-style: italic; color: #666; }
+
+/* indiv gallery page */
+.gallerytitle { font-size: 16px; font-weight: bold; color: #333333; }
+/*div.gallery { padding: 0; margin: 0; border: 0; width: 400px; border: 1px solid #666; float:left; max-width: 400px;}*/
+div.gallerycon { min-width: 200px; min-height: 200px; float: left; margin: 10px; text-align: center; border: 0px; position:relative; }
+.gallerycon img { padding: 5px; border: 1px solid #666000; }
+.gallerycon img.icon{ float: right; padding: 3px; border: 0px ; }
+.gallerycap { padding: 5px; border: 0px solid #666; margin: 5px; }
+div.gallery_pager { padding: 10px 0px 40px 0px; }
+div.gallery_image_details {
+  display:block;
+  width: 200px;
+  font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-weight: normal; color: #333333; text-align: center; vertical-align: middle; 
+ /* clip:   rect(   );  */
+  padding-top: 3px; padding-bottom: 3px
+}
+.gallerycon .enlarge-link {
+    background: url(http://www.radicaldesigns.org/img/magnify-clip.png ) no-repeat top left;
+    height:11px;
+    width: 15px;
+    display:block;
+    float:right;
+}
+a.gallery_image_link {
+    border: 0;
+}
+a.gallery_image_link img {
+    border: 1px solid black;
+}
+img.pager-thumb {
+	border: 1px solid;
+	margin: .25em;
+}
+img.pager-thumb:hover{
+	border-color: #FFFFFF;
+	opacity: .5;
+} 
+
+img.pager-thumb-current {
+	border: 4px solid;
+	border-color: #484848;
+	padding: 6px;
+	margin: 0 6px 0 6px;
+}
+div.pager-thumb-set {
+	margin:1em;
+	vertical-align: middle;
+}
+
+/* errors and results */
+span.page_result {
+		display:block;
+		border: #99CCFF 2px solid;
+		width: 60%;
+		background-color: #ddEEFF;
+		color: #006666;
+		text-align: center;
+		padding: 0.5em 5em 0.5em 5em;
+		margin: 1em 5em 0.5em 10em;
+}
+html > body span.page_result {
+		margin-left: 10%;
+}
+span.page_error {
+		display:block;
+		width: 60%;
+		border: #FF5599 2px solid;
+		background-color: #FF99CC;
+		color: #550000;
+		text-align: center;
+		padding: 0.5em 5em 0.5em 5em;
+		margin: 1em 5em 0.5em 10em;
+}
+html > body span.page_error {
+		margin-left: 10%;
+}
+
+span.list_subheader {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+div.list_header {
+	display: block;
+    border: 2px solid #9F6C06 ;
+	padding: 5px;
+	font-size: 15px;
+	font-weight: bold;
+    clear:both;
+}
+
+div.list_tags div.list_column {
+	float:left;
+}
+
+div.list_form div.list_column {
+	float:left;
+}
+
+
+div.list_item {
+	padding: 1em;
+    display:block;
+    overflow: hidden;
+    padding-right: 1em;
+	width:100%;
+}
+
+a.list_item{
+	padding: 1em;
+    display:block;
+    width: 100%;
+    font-size: 1.2em;
+}
+a.list_item:hover {
+	background-color: #EECC99;
+    text-decoration: none;
+}
+
+div.tagged_items div.list_item {
+    display: block;
+    padding: 1em;
+    width: 100%;
+}
+
+div.tagged_items a.list_item {
+    font-size: 1.5em;
+}
+
+div.list_item_blog {
+	border-bottom: 2px groove #333333;
+	padding-bottom: 2em;
+	margin-bottom: 1em;
+}
+
+div.blog_postmark, div.blog_list_footer {
+    margin-top: 1em;
+	text-align: right;
+}
+
+#comments_list {
+    margin-top: 1em;
+    padding-top: 3em;
+    border-top: 3px groove #ececec;
+    text-align: left;
+}
+
+div.userdata_pager {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top: 2px;
+    background-color: #E5E5E5;
+
+}
+
+div.userdata_pager_footer {
+    width:100%;
+    text-align:right;
+    padding-bottom:5px;
+    padding-top:2px;
+    background-color:#E5E5E5;
+}
+
+.name {
+	font-size: 11px;
+	text-align: left;
+}
+
+div.webaction_message {
+	background-color: #e1e1e1;
+	float: left;
+	padding: .5em;
+	margin: .5em;
+	height: 100%;
+}
+
+div.webaction_form {
+	float: left;
+	padding: .5em;
+	margin: .5em;
+}
+
+div.article_media {
+    margin-left:15%;
+    display: block;
+    padding: 1em;
+}
+
+.article_public_list .list_item {
+    width: auto;
+}
+div.article_public_detail {
+    margin-left: 10px;
+}
+div.article_public_detail .image {
+    position:relative;
+    width: 250px;
+    margin: 0 1em 1em 0;
+    float: left;
+}
+
+div.article_public_detail .image a.image-link {
+	position:relative;
+	float: left;
+}
+
+div.article_public_detail img.img_main {
+    margin: 0 0 4px 0;
+}
+div.article_public_detail .image-right .photocaption {
+    position:relative;
+}
+div.article_public_detail .image-right {
+    position:relative;
+    float: right;
+    margin: 0 0 1em 1em;
+}
+
+div.photo-credit-article {
+    padding: 0 .5em .5em 0;
+    font-size: 10px;
+}
+div.photo-credit-article .content-license {
+    float:left;
+    margin-right: 1em;
+}
+
+div.list_image {
+    float: left;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+
+span.intitle {
+	display: block;
+	width: 100%;
+	background-color: #50A0f0;
+	color: #FFF;
+	font-weight: bold;
+	padding: .5em;
+	margin: .25em;
+}
+
+img.img_main {
+    margin: 4px;
+    border: 0px;
+}
+
+div.form_header, span.form_header {
+	width: 100%;
+	background-color: #50A0f0;
+	color: #FFF;
+	font-weight: bold;
+	padding: .5em;
+	margin: .25em;
+    clear: both;
+	display: block;
+}
+
+form .row {
+    clear: both;
+    padding-top: 1em;
+}
+
+form .row .error {
+    width: 79%;
+    text-align: left;
+	position: relative;
+	margin-left: 21%;
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 10px
+}
+
+form .row_error {
+    margin-top: .5em;
+	padding-top: .5em;
+	border: #FF5599 2px solid;
+	background-color: #FF99CC;
+	color: #550000;
+	float: left;
+}
+
+form .row label {
+    float: left;
+    width: 19%;
+    text-align: right;
+}
+
+form .row .element {
+    float: right;
+    width: 79%;
+    text-align: left;
+}
+
+form .row input, form .row textarea {
+    width: auto;
+}
+
+
+form .block {
+    background-color: #FFFFcc;
+    border: 2px solid #F0C0C0;
+}
+
+form .submit input, form .number input {
+    width: auto;
+}
+
+form span.required {
+	color: red;
+}
+
+
+
+div.spacer {
+    clear: both;
+}
+
+img.template_image {
+    border: 0;
+}
+
+div.filelink {
+    display:block;
+    width:100%;
+    text-align:center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+div.filelink a {
+    border: 1px solid black;
+    padding: 1em;
+    padding-left: 3em;
+    background: url(http://www.radicaldesigns.org/img/go-down.png ) 5% 50% no-repeat;
+}
+
+div.filelink a:hover {
+    background-color: #ddeeff;
+    text-decoration:none;
+    color: #006666;
+    border: #99CCFF 2px solid;
+}
+
+div.thumb {
+    float: left;
+    margin-right: 1em;
+
+}
+
+div.thumb img {
+    border: 0;
+}
+
+div.list_intro {
+	margin: 1em;
+}
+
+.nav_element .list_item .empty_thumb {
+	width: 0px;
+	height: 0px;
+	margin: 0;
+}
+
+.tagcloud_badge {
+    margin: 1em;
+    text-align: center;
+}
+a.amp_cloud_link {
+    margin-left: .2em;
+    padding-top: .25em;
+}
+a.amp_cloud_link_1 {
+	font-size: .9em;
+}
+a.amp_cloud_link_2 {
+	font-size: 1em;
+}
+a.amp_cloud_link_3 {
+	font-size: 1.2em;
+}
+a.amp_cloud_link_4 {
+	font-size: 1.5em;
+}
+a.amp_cloud_link_5 {
+	font-size: 2em;
+}
+.search_form .item {
+	position: relative;
+	float: left;
+	margin-left: 3px;
+}
+
+.search_form .row label, .search_form .row .element {
+	position:relative;
+	float: left;
+	width:auto;
+	vertical-align: top;
+}
+.search_form label {
+	padding-top: .5em;
+}
+
+.search_form, .search_form input, .search_form select {
+	font-size: 11px;
+	text-decoration: none;
+	margin-left: 3px;
+}
+
+ol.comments_list li.list_item {
+	clear: both;
+}
+ol.comments_list li.list_item p {
+	padding-bottom: 1em;
+}
+.comments_toolbar {
+	width: 100%;
+}
+.comments_block {
+	margin-left: 10px;
+	width: 100%;
+	border-top: 2px solid #A3a3a3;
+	padding: 1em 0 1em 0;
+	margin-top: .5em;
+}
+/* sitemap */
+.map_block {
+	margin: 0 1em 3em 1em;  
+}
+.map_block .list_item { width: auto; padding: 2px 2px 2px 2px; }
+
+.map_2 {
+	margin-left: 2em;
+}
+.map_3 {
+	margin-left: 3.5em;
+}
+.map_4 {
+	margin-left: 5em;
+}
+.map_5, .map_6, .map_7, .map_8 {
+	margin-left: 6em;
+}
+.map_2 .title{
+	font-size: 16px;
+}
+.map_3 .title{
+	font-size: 14px;
+}
+.map_4 .title, .map_5 .title, .map_6 .title, .map_7 .title, .map_8 .title{
+	font-size: 12px;
+}
+
+.rating_block label{
+	position: relative;
+	float: left;
+	display:block;
+    clear: both;
+}
+.rating_block #rating {
+	position: relative;
+	float: left;
+	margin-left: 1em;
+	height: 14px;
+    width: 80px;
+	overflow:hidden;
+
+}
+#rating div{
+	background:url(http://www.radicaldesigns.org/img/star.gif ) top left no-repeat;
+	height: 14px;
+	width: 15px;
+	position: relative;
+	float:left;
+	cursor: pointer;
+}
+#rating .star_on {
+	background:url(http://www.radicaldesigns.org/img/star_on.gif ) top left no-repeat;
+}
+#rating div:hover {
+	background:url(http://www.radicaldesigns.org/img/star_hilite.gif ) top left no-repeat;
+}
+.rating_current_value {
+    margin-top:2em;
+    margin-bottom:1em;
+    line-height: 16px;
+}
+.rating_current_value .visual {
+    background:url(http://www.radicaldesigns.org/img/star_hilite.gif ) repeat-x top left;
+    height: 14px;
+    float:left;
+    margin-right:.5em;
+}
+.rating_block {
+    padding: 1em;
+    display:block;
+    position:relative;
+}
+.article-archives li{
+	list-style:none;
+	margin: .5em;
+	font-weight: bold;
+}
+
+span.board_label {
+    font-weight:bold;
+}
+

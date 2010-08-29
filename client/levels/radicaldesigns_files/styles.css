@@ -1,0 +1,532 @@
+/*ARTICLE PAGES*/
+
+body {
+background: #a00e00 url(http://www.radicaldesigns.org/img/radicaldesigns_wings.gif) top center no-repeat ;
+font-size: 14px; font-weight: normal; color: #333333; line-height: 1.5em;
+}
+
+body.nocrap {
+background: #fff;
+font-size: 14px; font-weight: normal; color: #333333; line-height: 1.5em;
+}
+
+
+form {
+margin: 0;
+padding: 0;
+border: 0;
+outline: 0;
+font-weight: inherit;
+font-style: inherit;
+font-size: 100%;
+font-family: inherit;
+vertical-align: baseline;
+}
+
+body {
+text-align: center;
+margin:0;padding:0;
+font-family: arial;
+}
+
+h4 {
+color: #333333;
+font-size: 16px;
+margin: 0;
+padding: 0;
+}
+
+.text {   font-weight: normal; color: #333333; }
+
+.title { font-size: 35px; font-weight: bold; color: #FFFFFF; line-height:1.2em; padding-bottom: 20px;display: none; }
+span.title{display:none}
+.subtitle { font-size: 14px; font-weight: normal; color: #006595;  font-family: Trebuchet, Verdana, Arial, Helvetica, sans-serif;}
+.callout { font-size: 16px; font-weight: normal; color: #006595; }
+.author {  font-size: 12px; font-weight: normal; }
+.date {   font-size: 12px; font-weight: normal; color: #333333; }
+.form {  font-size: 12px; font-weight: bold; color: #333333}
+.photocaption {  font-size: 10px; font-weight: normal; color: #333333; text-align: center; vertical-align: middle; clip:   rect(   ); padding-top: 3px; padding-bottom: 3px}
+.docbox {border : 1px double Black; font-size : 13px; text-align : center; }
+
+blockquote {
+background-color:#E6EAF3;
+border-bottom:1px solid #013C80;
+border-top:1px solid #013C80;
+margin-left:1.5em;
+padding:10px;
+color:#101D27;
+font-style:italic;
+}
+
+.tablerap { border: 1px solid #000 ; }
+.tablemain { padding: 8px; }
+.tablenav {border-right: 1px dashed #666; }
+.tablediv { padding: 8px; border-top: 1px dashed #666; border-bottom: 1px dashed #666;  }
+
+td.divright { padding: 8px; border-right: 1px dashed #666; }
+td.divleft  { padding: 8px; }
+
+.highlights { font-size: 7pt; color: #333; }
+.clear { clear: both; }
+/*LINKS*/
+
+a {  color: #006595; text-decoration: none}
+a:hover {  color: #006595; text-decoration: underline}
+
+
+/*LIST PAGES     text */
+
+.listtitle { font-size: 24px; font-weight: bold; display: block; margin-bottom: -10px;}
+.bodygreystrong {font-size: 12px; font-weight: bold; color: #333333}
+
+
+/*INDEX PAGE     subtitle  */
+
+.hometitle {  font-size: 14px; font-weight: bolder; color: #006699; text-decoration: none}
+.homebody { font-size: 12px; color: #000000}
+
+/*Design Specific  */
+
+.masborder { border: 2px #000000 solid; }
+.features { font-size: 10px; font-weight: bold; color: #000000}
+
+
+/*NAVIGATION*/
+
+.breadcrumb { font-size: 9px; color: #333333}
+.subside {font-size: 14px; font-weight: normal; color: #FF6600; text-transform: uppercase; letter-spacing: 2px; display: block; padding-bottom: 12px;}
+.go { font-size: 9px}
+.sidelist {font-size: 12px;  color: #FFFFFF; padding: 5px; display:block;}
+a.sidelist:hover {  background: #FFFFFF; color: #0092C3; text-decoration:none;}
+.subsidelist {  font-size: 14px;  color: #FFFFFF; margin-bottom:4px;}
+#nav_id_101 .subsidelist a { color: #0088cc; }
+
+mainnav { color: #000 ; font-size: 11px; font-weight: bold; }
+a.mainnav {color: #fff; font-size: 11px; font-weight: bold; }
+
+/*NEWS and PR PAGES    bodystronggrey*/
+
+.newssubtitle { font-size: 12px; font-weight: bold; color: #333333}
+.newstitle { font-size: 18px; font-weight: bold; color: #000000}
+.bodystrong {font-size: 12px; font-weight: bold; color: #000000}         
+.bodygrey {font-size: 12px; font-weight: normal; color: #333333}
+     /*used in groups*/
+
+
+
+/*CALENDAR*/
+.eventsubtitle {font-size: 12px; font-weight: bold; color: #333333}
+      /*used in groups*/
+
+.eventtitle {font-size: 12px; font-weight: bold}
+      /*used in groups*/
+
+
+/*GROUPS & ENDORSEMENTS bodygrey, eventsubtitle,  eventtitle*/
+
+
+/*not in code */
+
+.rap {
+border: 1px solid #E6F0FE;
+}
+
+.linktype{
+font-size:20px;
+}
+
+.footer { text-align: right; display: block; padding: 15px 20px 10px 0px; color: #7d97bb;  } 
+
+.qlinks { text-align: right; display: block; padding: 10px 20px 10px 0px; color: #7d97bb; font-size: 10px;  }
+.qlinks a {  color: #7d97bb;  font-size: 10px;  }
+.fpmission { color: #666666; display: block; line-height: 20px; padding: 5px;}
+.shout {  color: #02168e; font-size: 16px;  }
+
+.fpheader { display: block; padding: 0px 0px 8px 0px; color: #02168e; font-size: 14px; font-weight: bold; }
+
+.fpmore { display: block; padding: 10px 5px 5px 0px; text-align: right; color: #666666;font-size: 14px; }
+.fpmore a { color: #666666; font-size: 14px;} 
+.fptitles { display: block; padding: 0px 0px 5px 0px; color: #666666; font-weight: bold; font-size: 12px; }
+.fpnavs { line-height: 15px; font-size: 11px; }
+.fpnavs .shout {  font-size: 13px; }
+
+#shader { display: none; position: absolute; bottom: 0; left: 45%; }
+
+
+#container{
+text-align: left;
+margin: 0 auto;
+width: 910px;
+background: #333333 url(http://www.radicaldesigns.org/img/radicaldesigns_bg_04.gif) top left repeat-x ;
+}
+
+#transparentbg {
+background-image: url('/img/radicaldesigns_bg_06.gif');
+background-position:  top right ;
+background-repeat: no-repeat;
+background-attachement: scroll;
+/* silly ie bullshit */
+height: 1%;
+}
+/* silly ie bullshit */
+html>body #transparentbg {
+height: auto;
+}
+#header{
+position: relative;
+height: 120px;
+background: #070707;
+}
+
+#header a img{
+border: none;
+margin:0;padding:0;
+}
+
+#nav{
+color: #fff;
+position: absolute;
+top: 90px;
+left: 35px;
+font-size: 14px;
+}
+
+#nav a{
+color: #fff;
+text-decoration: none;
+font-size: 14px;
+}
+
+.nav-slash{
+color: #FF6600;
+}
+
+#signup {
+display:block;
+left:640px;
+margin-left:0;
+position:absolute;
+top:0;
+width:400px;
+}
+#content{
+background: #fff;
+margin: 10px;
+clear:both;
+width: 690px;
+float:left;
+min-height: 740px;
+}
+
+#content-padder{
+margin: 40px 60px 20px 30px;
+}
+
+#index-content{
+margin: 10px;
+float:left;
+background: transparent;
+}
+#index-right {
+float: left;
+width: 705px;
+margin-top:7px;
+}
+#index-left {
+float: left;
+width: 185px;
+}
+#index-highlight {
+background: #fff;
+clear:both;
+float:left;
+width: 880px;
+}
+#index-highlight-padder {
+padding: 5px;
+}
+.index-highlight-padder {
+padding: 20px 22px 0 29px;
+}
+#index-highlight h4 {
+color: #cc0001;
+font-weight: normal;
+font-size: 24px;
+margin-bottom: 10px;
+}
+#index-highlight-1 {
+background:url("/img/radicaldesigns_index_21.gif") repeat-x scroll center top #0092C3;
+color:#FFFFFF;
+float:left;
+font-size:16px;
+height:13em;
+line-height:1.6em;
+width:280px;
+}
+#index-highlight-1-padder {
+padding: 35px 16px 15px 21px;
+}
+#index-highlight-2 {
+font-size: 14px;
+line-height: 1.5em;
+background: url(http://www.radicaldesigns.org/img/radicaldesigns_index_18.gif) top right no-repeat;
+width: 290px;
+float: left;
+}
+#index-highlight-go-2 {
+display: block;
+margin-top: 34px;
+}
+#index-highlight-3 {
+font-size: 14px;
+line-height: 1.5em;
+width: 265px;
+float: left;
+}
+#index-highlight-go-3 {
+display: block;
+margin-top: 12px;
+}
+#index-featured {
+font-size: 14px;
+line-height: 1.4em;
+width: 695px;
+height:466px;
+float: left;
+position: relative;
+}
+#index-featured-padder {
+padding: 14px 14px 7px 21px;
+margin: 5px 0px 10px 0;
+background:#FFFFFF;
+}
+#index-news {
+margin: 0px 0px 10px 0;
+font-size: 14px;
+line-height: 1.4em;
+background:#FFFFFF;
+width: 695px;
+float: left;
+}
+#index-news-padder {
+padding: 20px;
+}
+#index-news h4 {
+color: #ff6600;
+font-size: 25px;
+font-weight: normal;
+}
+
+#news-nav{
+margin-top: 20px;
+}
+.news-text-item {
+margin-bottom: 20px;
+}
+.news-text-title{
+color: #990100;
+font-weight: bold;
+font-size: 16px;
+}
+.news-date {
+font-weight:bold;
+}
+.news-text-more{
+color: #FF6600;
+font-weight: bold;
+}
+
+#left_nav{
+width: 180px;
+float:left;
+margin-top: 20px;
+}
+#index-content-padder #left_nav {
+margin-top: 0;
+} 
+#index-content-padder #sidenav-padder{
+padding:0;
+} 
+#mission{
+background: #007faf;
+width: 300px;
+}	
+
+#mission-padder{
+padding: 10px;
+}
+
+#footer{
+clear:both;
+height: 40px;
+color: #666666; 
+font-weight: bold;
+text-align: center;
+font-size: 14px;
+padding: 25px 0 0px 0;
+}
+#footer-padder{
+  margin:auto;
+  width:620px;
+}
+#footer a {
+color: #666666; 
+font-weight: bold;
+text-align: center;
+font-size: 14px;
+}
+
+#sidenav-padder {
+padding:  5px 0 0px 0;
+}
+
+.onward {
+font-size: 16px;
+padding: 10px 35px;
+color: #006595;
+border: 1px solid #dfdfdf;
+background: #F1F1F3;
+margin-top: 35px;
+}
+.onward a {
+color: #006595;
+}
+.onward h4 {
+margin: 5px 0 6px 0;
+}
+.links img {
+padding: 4px 20px 10px 0;
+float: left;
+}
+
+.profile-link {
+padding: 10px 0 0 0;
+font-size: 16px;
+width: 400px;
+float: left;
+}
+
+span.list_subheader {
+display: block;
+padding: 30px 0 10px 0;
+font-size: 16px;
+color: #666666;
+}
+
+#buttons img {
+margin: 0px 0px 0px 0px;
+}
+#index-slideshow{
+height:400px;
+overflow:hidden;
+}
+.slide-title {
+font-size: 18px;
+line-height: 1em;
+color: #0088CC;
+display: block;
+margin-bottom: 4px;
+}
+.slide-body {
+font-size: 12px;
+line-height: 1.2em;
+color: #333333;
+display: block;
+}
+.slide-img {
+display: block;
+height:280px;
+width: 653px;
+overflow: hidden;
+}
+.slide-left {
+}
+.slide-left-padder {
+padding-top: 12px;
+}
+.slide-img img {
+width: 653px;
+}
+#slideshow-pager {
+bottom:12px;
+position:absolute;
+right:20px;
+z-index:200;
+}
+#slideshow-pager a {
+background:#999999;
+color:#FFFFFF;
+display:block;
+float:left;
+font-size:13px;
+font-weight:bold;
+margin:0 3px;
+padding:2px 8px;
+}
+#slideshow-pager a:hover {
+background:#666666;
+text-decoration: none;
+}
+#slideshow-pager a.activeSlide {
+background:#333333;
+}
+#portfolio-link {
+padding: 10px;
+bottom: 2px;
+position:absolute;
+left:10px;
+z-index:200;
+font-size: 13px;
+}
+#portfolio-link a {
+color: #FF6600;
+}
+.slide-label {
+color: #666666;
+font-size: 16px;
+display: block;
+padding: 0 0 8px 0;
+}
+.arrows {
+color: #FF6600;
+font-size: 18px;
+}
+.list_item .listtitle a{
+color:#006595;
+font-size:18px;
+}
+.description a.listtitle {
+color: #006595;
+}
+#tools-and-services .list_item_custom {
+border: 1px solid #dfdfdf;
+margin: 20px 0 10px 0;
+padding: 10px;
+background: #F1F1F3;
+}
+#tools-and-services .list_item_custom .description {
+width: 430px;
+float: left;
+}
+#tools-and-services .list-arrow {
+width: 90px;
+float: left;
+}
+#arrow-2, #arrow-3  {
+margin-top: 15px;
+}
+#arrow-4 {
+margin-top: 4px;
+}
+#arrow-5 {
+margin-top: 15px;
+}
+.title-hack h1 {
+font-size: 35px; font-weight: bold; color: #FFFFFF; line-height:1.2em; padding-bottom: 20px;display: block;
+}
+.title-hack-pad {
+background: #0091c1 url(http://www.radicaldesigns.org/img/rdsite_bannerbg.gif) top left repeat-x; 
+padding:40px 60px 0px 30px;
+}
+
+#sheep-btn{cursor:pointer;}
