@@ -17,11 +17,15 @@ Player.prototype = {
       switch (event.keyCode){
         case Config.key_codes.left:
           self.avatar.move.left = true;
-          self.avatar.move.right = false;
           return false;
         case Config.key_codes.right:
           self.avatar.move.right = true;
-          self.avatar.move.left = false;
+          return false;
+        case Config.key_codes.down:
+          self.avatar.move.down = true;
+          return false;
+        case Config.key_codes.up:
+          self.avatar.move.up = true;
           return false;
         case Config.key_codes.jump:
           self.avatar.accelerate_up();
@@ -40,6 +44,12 @@ Player.prototype = {
           return false;
         case Config.key_codes.right:
           self.avatar.move.right = false;
+          return false;
+        case Config.key_codes.up:
+          self.avatar.move.up = false;
+          return false;
+        case Config.key_codes.down:
+          self.avatar.move.down= false;
           return false;
       }
     });

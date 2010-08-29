@@ -22,6 +22,7 @@ describe('Avatar', function() {
       expect(avatar.velocity.y).toEqual(-1 * MAX_Y_VELOCITY);
     });
   });
+
   describe('gravity', function() {
     it("every game tick should add to velocity.y", function() {
       expect(avatar.velocity.y).toEqual(0);

@@ -25,6 +25,18 @@ describe('Bullet', function(){
       expect(bullet.position.x).toEqual( AVATAR_WIDTH / 2 + BULLET_VELOCITY );
     });
 
+    it('should shoot right when the player has no direction', function() {
+      player.avatar.move.left = false;
+      player.avatar.move.right = false;
+      player.avatar.move.up = false;
+      player.avatar.move.down = false;
+      simulate_shoot_key_press();
+      var bullets = game.bullets;
+      bullet = bullets[bullets.length-1];
+      game.next_tick();
+      expect(bullet.position.x).toEqual( AVATAR_WIDTH / 2 + BULLET_VELOCITY );
+    });
+
     it('should have an html source containing the top and left positions', function() {
       expect(bullet.html).toMatch(/class=.bullet./);
       expect(bullet.html).toMatch(/top:\d+px./);
@@ -39,6 +51,27 @@ describe('Bullet', function(){
         bullet = bullets[bullets.length-1];
         game.next_tick();
         expect(bullet.position.x).toEqual( (AVATAR_WIDTH / 2) - BULLET_VELOCITY );
+      });
+    });
+
+    describe('vertical shooting', function() {
+      it("the bullet should shoot straight up", function() {
+        simulate_up_key_press();
+        simulate_shoot_key_press();
+        var bullets = game.bullets;
+        bullet = bullets[bullets.length-1];
+        game.next_tick();
+        expect(bullet.position.x).toEqual( (AVATAR_WIDTH / 2) );
+        expect(bullet.position.y).toEqual( (AVATAR_HEIGHT / 3) - BULLET_VELOCITY );
+      });
+      it("the bullet should shoot straight down", function() {
+        simulate_down_key_press();
+        simulate_shoot_key_press();
+        var bullets = game.bullets;
+        bullet = bullets[bullets.length-1];
+        game.next_tick();
+        expect(bullet.position.x).toEqual( (AVATAR_WIDTH / 2) );
+        expect(bullet.position.y).toEqual( ((AVATAR_HEIGHT / 3) + BULLET_VELOCITY ));
       });
     });
   });

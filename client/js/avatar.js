@@ -8,6 +8,7 @@ Avatar = function(options){
 
   self.move = new MovementTracker(); 
   self.direction = self.move.direction;
+  self.direction.x = 1;
 
   self.animation_cycles = {
     run_right:{y:0,step:90,frames:6},
@@ -16,9 +17,6 @@ Avatar = function(options){
   
   self.current_cycle = this.animation_cycles.run_right;
   self.current_cycle.current_frame = 0;
-  self.move.left = false;
-  self.move.right = false;
-  self.velocity = {x:0, y:0};
 };
 
 Avatar.prototype = {
