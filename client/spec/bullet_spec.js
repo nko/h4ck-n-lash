@@ -33,7 +33,7 @@ describe('Bullet', function(){
 
     describe('when the player is moving left', function() {
       it("should shoot left", function() {
-        player.avatar.move.left = true;
+        simulate_left_key_press();
         simulate_shoot_key_press();
         var bullets = game.bullets;
         bullet = bullets[bullets.length-1];
