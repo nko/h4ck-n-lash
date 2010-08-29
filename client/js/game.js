@@ -23,7 +23,10 @@ var Game = function() {
       self.player_id = message.id;
     } else if(message.event=='bullet'){
       self.create_bullet({position:message.bullet.position,owner_id: message.id, direction: message.bullet.direction});    
-    }else {
+    } else if(message.event == 'die') {
+      console.log('avatar '+message.id+' got a die event');
+      delete self.avatars[message.id];
+    } else {
       message.game = self;
       if(self.avatars[message.id]) {
         self.avatars[message.id].position = message.position;

@@ -18,7 +18,12 @@ socket.on( 'clientConnect', function(client){
 });
 
 socket.on('clientMessage', function( msg, client){
-  sys.puts(sys.inspect(msg));
+//  sys.puts(sys.inspect(msg));
   client.broadcast(msg);
+});
+
+socket.on('clientDisconnect', function(client){
+  sys.puts('client diconnected: '+client.sessionId);
+  client.broadcast(JSON.stringify({event:'die',id:client.sessionId})); 
 });
 
