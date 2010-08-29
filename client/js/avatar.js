@@ -6,6 +6,7 @@ Avatar = function(options){
   self.type = 'avatar';
   self.velocity = {x:0, y:0};
   self.game = options.game;
+  self.life = options.life;
 
   self.move = new MovementTracker(); 
   self.direction = self.move.direction;
@@ -27,7 +28,7 @@ Avatar = function(options){
 
 Avatar.prototype = {
   get html() {
-    return '<div id="avatar-'+this.id+'" class="avatar" style="top:'+Math.floor(this.position.y)+'px;left:'+Math.floor(this.position.x)+'px;background-position:'+(-1*this.current_cycle.current_frame*this.current_cycle.step)+'px '+this.current_cycle.y+'px"><div class="avatar-name">'+this.name+'</div></div>';
+    return '<div id="avatar-'+this.id+'" class="avatar" style="top:'+Math.floor(this.position.y)+'px;left:'+Math.floor(this.position.x)+'px;background-position:'+(-1*this.current_cycle.current_frame*this.current_cycle.step)+'px '+this.current_cycle.y+'px"><div class="avatar-name"><div class="life-bar" style="width:' + ( this.life * 8 ) + 'px;"></div>' + this.name + '</div></div>';
   },
 
   accelerate_left : function(){

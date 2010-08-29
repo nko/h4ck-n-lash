@@ -8,7 +8,6 @@ var Game = function() {
   self.socket = create_websocket('ws://'+window.location.hostname+':8001');
 
   self.on_player_entry = function(ev) {
-  	$('#hello').html('Hello, '+ev.player.name);
     ev.player.avatar.game = self;
     self.player = ev.player;
     self.avatars[ev.player.name] = ev.player.avatar;
@@ -31,6 +30,7 @@ var Game = function() {
       if(self.avatars[message.id]) {
         self.avatars[message.id].position = message.position;
         self.avatars[message.id].direction = message.direction;
+        self.avatars[message.id].life = message.life;
       } else {
         self.avatars[message.id] = new Avatar(message);
       }
@@ -69,7 +69,7 @@ var Game = function() {
 
   self.on_bullet_collision = function(ev) {
     ev.bullet.destroy();
-    ++self.player.hits;
+    --self.player.life;
     self.socket.send(JSON.stringify({event: 'collision', id: self.player_id, owner_id: ev.bullet.owner_id}));
   };
   
@@ -104,7 +104,13 @@ var Game = function() {
 
 Game.prototype = {
   update_server: function(){
-    this.socket.send( JSON.stringify({id:this.player_id,name:this.player.name,position:this.player.avatar.position, direction: this.player.avatar.direction}));
+    this.socket.send( JSON.stringify({
+      id:this.player_id,
+      name:this.player.name,
+      position:this.player.avatar.position, 
+      direction: this.player.avatar.direction,
+      life: this.player.life 
+      }));
   },
   update_sprites: function(){
     $.each(this.avatars,function( i, avatar){
@@ -125,13 +131,9 @@ Game.prototype = {
     $.each(this.bullets,function( i, bullet){
       sprites_html.push(bullet.html);
     });
-    this.update_hud();
     
     $('#sprite-container').empty();
     $('#sprite-container').html(sprites_html.join(''));
-  },
-  update_hud: function() {
-    $('#scoreboard .hits').text( this.player.hits );
   },
   scroll_to_avatar: function() {
     var avatar = this.player.avatar;

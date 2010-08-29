@@ -79,7 +79,8 @@ body {
   background-color: rgba(34, 34, 34, 0.8);
 	position: fixed;
 	width:140px;
-	height:120px;
+	min-height:120px;
+	padding-bottom:12px;
   border:1px solid black;
 	right:0;
 	top:0;
@@ -98,5 +99,11 @@ body {
   border: 1px solid black;
   -moz-border-radius: 6px;
   border-radius: 6px;
+}
+
+.life-bar {
+  height: 5px;
+  background-color: red; /*rgba(256, 0, 0, .5); */
+  border: 1px solid white;
 }
 

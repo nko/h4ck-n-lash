@@ -1,7 +1,7 @@
 var Player = function( options ) {
   options = options || {};
 	options.name = options.name || "anonymous";
-  this.hits = 0;
+  options.life = PLAYER_LIFE;
   
   this.avatar = new Avatar(options);
   this.initialize_keyboard_bindings();
@@ -62,5 +62,12 @@ Player.prototype = {
   },
   set name(new_name) {
     return this.avatar.name = new_name;
+  },
+
+  get life() {
+    return this.avatar.life;
+  },
+  set life(value) {
+    return this.avatar.life = value;
   }
 };

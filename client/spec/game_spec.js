@@ -89,20 +89,20 @@ describe("Game", function() {
       it("should not do anythinig for bullets that don't overlap with the player avatar", function() {
         game.detect_collisions();
         expect(game.bullets).toContain(bullet);
-        expect(player.hits).toEqual(0);
+        expect(player.life).toEqual(PLAYER_LIFE);
       });
 
       it("fires a collision event when execution-style killing occurs", function() {
         bullet.position = { x: player.avatar.position.x + 1, y: player.avatar.position.y + 1 }
         game.detect_collisions();
         expect(game.bullets).not.toContain(bullet);
-        expect(player.hits).toEqual(1);
+        expect(player.life).toEqual(PLAYER_LIFE - 1);
       });
 
       it("should fire a collision event when a bullet overlaps with the player avatar", function() {
         repeat(2, function(){ game.next_tick(); });
         expect(game.bullets).not.toContain(bullet);
-        expect(player.hits).toEqual(1);
+        expect(player.life).toEqual(PLAYER_LIFE - 1);
       });
 
       it('shoul send a message about the collision', function() {
@@ -116,7 +116,7 @@ describe("Game", function() {
         bullet.owner_id  = game.player_id;
         repeat(2, function(){ game.next_tick(); });
         expect(game.bullets).toContain(bullet);
-        expect(player.hits).toEqual(0);
+        expect(player.life).toEqual(PLAYER_LIFE);
       });
 
     });
@@ -127,18 +127,11 @@ describe("Game", function() {
       expect(window.create_websocket).toHaveBeenCalled();
     });
 
-    it("sends a position for each tick", function() {
+    it("sends a position, direction and life for each tick", function() {
       socket_spy.send = jasmine.createSpy('sender');
       game.next_tick();
       expect(socket_spy.send).toHaveBeenCalled();
-      expect(JSON.parse(socket_spy.send.mostRecentCall.args[0])).toEqual({name:'anonymous',position: {x:0, y:GRAVITY}, id:0, direction: {x:1, y:0}});
-    });
-
-    it("sends a direction for each tick", function() {
-      socket_spy.send = jasmine.createSpy('sender');
-      game.next_tick();
-      expect(socket_spy.send).toHaveBeenCalled();
-      expect(JSON.parse(socket_spy.send.mostRecentCall.args[0])).toEqual({name:'anonymous',position: {x:0, y:GRAVITY}, id:0, direction: {x:1, y:0}});
+      expect(JSON.parse(socket_spy.send.mostRecentCall.args[0])).toEqual({name:'anonymous',position: {x:0, y:GRAVITY}, id:0, direction: {x:1, y:0}, life: PLAYER_LIFE});
     });
 
     it("listens to the socket for new avatars and adds them to the avatars array", function() {
