@@ -7,6 +7,13 @@ describe('Bullet', function(){
     bullet = game.bullets[0];
   });
 
+  describe('lifecycle', function() {
+    it("should live for a limited time", function() {
+      jasmine.Clock.tick(BULLET_TIMEOUT+1);
+      expect(game.sprites.indexOf(bullet)).toEqual(-1);
+    });
+  });
+
   describe('moving the bullet', function(){
     it('should have a position and velocity', function(){
       expect(bullet.position).toBeDefined();
@@ -26,4 +33,7 @@ describe('Bullet', function(){
       expect(bullet.html).toMatch(/left:\d+px./);
     });
   });
+
+
+
 });

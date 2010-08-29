@@ -95,9 +95,9 @@ describe("Player", function() {
     });
     describe("on fire", function() {
       it("should add a bullet to the game", function() {
-        expect(game.bullets.length).toEqual(0);
+        expect(game.sprites.length).toEqual(1);
         simulate_shoot_key_press();
-        expect(game.bullets.length).toEqual(1);
+        expect(game.sprites.length).toEqual(2);
       });
     });
   });

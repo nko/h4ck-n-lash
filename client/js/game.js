@@ -2,7 +2,6 @@ var Game = function() {
   var self = this;
   self.sprites = [];
   self.platforms = [];
-  self.bullets = [];
 
   self.on_player_entry = function(ev) {
   	$('#hello').html('Hello, '+ev.player.name);
@@ -15,8 +14,14 @@ var Game = function() {
 
   self.on_player_shoot = function(ev){
     var bullet = new Bullet(ev.player);
-    self.bullets.push(bullet);
     self.sprites.push(bullet);
+    //var index = self.sprites.length-1;
+    setTimeout( function() {
+      console.log('deleted a bullet hurray!!!');
+      //self.sprites.splice(index, 1);
+      self.sprites.splice(self.sprites.indexOf(bullet), 1);
+      delete bullet;
+    }, BULLET_TIMEOUT );
   };
   $('body').bind('player.shoot', self.on_player_shoot)
 
@@ -25,10 +30,12 @@ var Game = function() {
     level = new Level(level_id);
     return level;
   };
+
   self.build_display = function(){
     //load level
     $('#level-container').html(self.current_level.html);
   };
+
   self.next_tick = function(){
     self.update_sprites();
     self.refresh_display();
@@ -41,7 +48,6 @@ var Game = function() {
   self.pause = function() {
     clearInterval(self.loop_timer);
   };
- 
   return self;
 }
 
@@ -62,4 +68,22 @@ Game.prototype = {
   add_platform: function(platform) {
     this.current_level.platforms.push(platform);
   },
+  get bullets() {
+    var bullets = [];
+    for(b in this.sprites)  {
+      if(this.sprites[b].type == 'bullet') {
+        bullets.push(this.sprites[b]);
+      }
+    }
+    return bullets;
+  },
+  get avatars() {
+    var avatars = [];
+    for(b in this.sprites)  {
+      if(this.sprites[b].type == 'avatar') {
+        avatars.push(this.sprites[b]);
+      }
+    }
+    return avatars;
+  }
 };
