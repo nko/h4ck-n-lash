@@ -111,6 +111,14 @@ describe("Game", function() {
         expect(JSON.parse(socket_spy.send.calls[1].args[0])).toEqual({event:'collision', id:game.player_id, owner_id:bullet.owner_id});
       });
 
+      it('shoul send a die message when the player is out of life', function() {
+        player.life = 1
+        repeat(2, function(){ game.next_tick(); });
+        game.next_tick();
+        expect(JSON.parse(socket_spy.send.calls[1].args[0])).toEqual({event:'collision', id:game.player_id, owner_id:bullet.owner_id});
+        expect(JSON.parse(socket_spy.send.calls[2].args[0])).toEqual({event:'die', id:game.player_id, owner_id:bullet.owner_id});
+      });
+
       it("should not fire a collision event when a player shoots herself", function() {
         game.player_id = 69;
         bullet.owner_id  = game.player_id;
@@ -139,5 +147,29 @@ describe("Game", function() {
       expect(game.avatars['123'].position.x).toEqual(10);
     });
 
+  });
+
+  describe('dying', function() {
+      var bullet;
+    beforeEach(function(){
+      player.life=1;
+      bullet = game.create_bullet({
+        position: { x:player.avatar.position.x+AVATAR_WIDTH, y: player.avatar.position.y},   
+        direction: { x: -1, y:0},
+        owner_id: 1337
+      });
+
+    });
+
+    /*it('closes the websocket', function(){
+      game.next_tick(); 
+      expect(game.socket.connected).toBe(false);
+    });*/
+
+    it('makes the death div visible', function(){
+      $('#jasmine_content').html('<div id="death-page" style="display:none"></div>');
+      game.next_tick();
+      expect($('#death-page').css('display')).toEqual('block');
+    });
   });
 });

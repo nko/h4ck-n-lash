@@ -71,8 +71,11 @@ var Game = function() {
     ev.bullet.destroy();
     --self.player.life;
     self.socket.send(JSON.stringify({event: 'collision', id: self.player_id, owner_id: ev.bullet.owner_id}));
+    if(self.player.life <= 0){
+      self.kill_player(ev.bullet.owner_id);
+    };
   };
-  
+   
   $('body').bind('bullet.collision', self.on_bullet_collision);
   self.get_level = function(level_id){
     if(!level_id) level_id = null;
@@ -83,7 +86,15 @@ var Game = function() {
   self.build_display = function(){
     $('#level-container').html(self.current_level.html);
   };
-
+  self.kill_player = function(owner_id){
+    self.socket.send( JSON.stringify({
+      event: 'die',
+      id: this.player_id,
+      owner_id: owner_id
+      }));
+    $('#death-page').css('display', 'block');
+    self.socket.disconnect();
+  }
   self.next_tick = function(){
     self.update_sprites();
     self.detect_collisions();
