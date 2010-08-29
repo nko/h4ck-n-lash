@@ -10,26 +10,11 @@ var Level = function(level_id) {
     self.html_file = new_level.html_file;
     self.width = new_level.width;
     self.height = new_level.height;
-    self.selectors = new_level.selectors;
     self.platforms = new_level.platforms || [];
     $.ajax({
       url: self.html_file,
       success: function(data){
         self.html = data;
-
-        /*if(self.selectors) {
-          var new_platforms = [];
-          $.each(self.selectors, function(i,selector){
-            $(selector, self.html).each(function(i, dom){
-              //console.log(dom);
-              var offset = $(dom, self.html).offset();
-              var width  = $(dom, self.html).css('width');
-              new_platforms.push({y:offset.top,x:offset.left,x_end:offset.left+width});
-            });
-          });
-          self.platforms.concat(new_platforms);
-        }*/
-
         level_loaded_event = jQuery.Event('level.loaded');
         level_loaded_event.level = self;
         $('body').trigger(level_loaded_event);
@@ -75,8 +60,7 @@ var github ={
   id: 3,
   name: 'github',
   height:2500,
-  width:1060,
-  selectors:['ul.org-members li', 'ul.repositories li.public', '.first', '.last'],
-  platforms:[],
+  width:1160,
+  platforms:[{"y":171,"x":172,"x_end":622},{"y":171,"x":642,"x_end":1092},{"y":281,"x":172,"x_end":622},{"y":311,"x":172,"x_end":600},{"y":445,"x":172,"x_end":600},{"y":579,"x":172,"x_end":600},{"y":713,"x":172,"x_end":600},{"y":847,"x":172,"x_end":600},{"y":1000,"x":172,"x_end":600},{"y":1134,"x":172,"x_end":600},{"y":1287,"x":172,"x_end":600},{"y":1421,"x":172,"x_end":600},{"y":281,"x":642,"x_end":1092},{"y":312,"x":642,"x_end":1050},{"y":355,"x":642,"x_end":1050},{"y":398,"x":642,"x_end":1050},{"y":441,"x":642,"x_end":1050},{"y":484,"x":642,"x_end":1050},{"y":527,"x":642,"x_end":1050},{"y":570,"x":642,"x_end":1050},{"y":613,"x":642,"x_end":1050},{"y":656,"x":642,"x_end":1050},{"y":699,"x":642,"x_end":1050},{"y":742,"x":642,"x_end":1050},{"y":785,"x":642,"x_end":1050},{"y":828,"x":642,"x_end":1050},{"y":871,"x":642,"x_end":1050},{"y":914,"x":642,"x_end":1050},{"y":957,"x":642,"x_end":1050},{"y":1000,"x":642,"x_end":1050},{"y":1043,"x":642,"x_end":1050},{"y":1086,"x":642,"x_end":1050},{"y":1129,"x":642,"x_end":1050},{"y":1172,"x":642,"x_end":1050},{"y":1215,"x":642,"x_end":1050},{"y":1258,"x":642,"x_end":1050},{"y":1301,"x":642,"x_end":1050},{"y":1344,"x":642,"x_end":1050},{"y":1387,"x":642,"x_end":1050},{"y":1430,"x":642,"x_end":1050},{"y":1473,"x":642,"x_end":1050},{"y":1516,"x":642,"x_end":1050},{"y":1559,"x":642,"x_end":1050},{"y":1602,"x":642,"x_end":1050},{"y":1645,"x":642,"x_end":1050},{"y":1688,"x":642,"x_end":1050},{"y":1731,"x":642,"x_end":1050},{"y":1774,"x":642,"x_end":1050},{"y":1817,"x":642,"x_end":1050},{"y":1860,"x":642,"x_end":1050},{"y":1903,"x":642,"x_end":1050},{"y":1946,"x":642,"x_end":1050},{"y":1989,"x":642,"x_end":1050},{"y":2032,"x":642,"x_end":1050},{"y":2075,"x":642,"x_end":1050},{"y":2118,"x":642,"x_end":1050},{"y":2161,"x":642,"x_end":1050},{"y":2204,"x":642,"x_end":1050},{"y":2247,"x":642,"x_end":1050},{"y":2290,"x":642,"x_end":1050},{"y":2333,"x":642,"x_end":1050}],
   html_file:'/levels/github.html'
 };
