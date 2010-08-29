@@ -12,7 +12,7 @@ describe("Player", function() {
     });
 
     it("should announce the player entry event to the Game", function() {
-      expect(game.sprites.length).toEqual(1);
+      expect(game.avatars[player.name]).toEqual(player.avatar);
     });
 
     it("should have an avatar", function() {
@@ -95,9 +95,9 @@ describe("Player", function() {
     });
     describe("on fire", function() {
       it("should add a bullet to the game", function() {
-        expect(game.sprites.length).toEqual(1);
+        expect(game.bullets.length).toEqual(0);
         simulate_shoot_key_press();
-        expect(game.sprites.length).toEqual(2);
+        expect(game.bullets.length).toEqual(1);
       });
     });
   });

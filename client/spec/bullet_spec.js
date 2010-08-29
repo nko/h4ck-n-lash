@@ -10,7 +10,7 @@ describe('Bullet', function(){
   describe('lifecycle', function() {
     it("should live for a limited time", function() {
       jasmine.Clock.tick(BULLET_TIMEOUT+1);
-      expect(game.sprites.indexOf(bullet)).toEqual(-1);
+      expect(game.bullets.indexOf(bullet)).toEqual(-1);
     });
   });
 

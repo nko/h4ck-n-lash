@@ -25,8 +25,8 @@ describe("Game", function() {
     expect($('#jasmine_content #level-container .tube').length).toEqual(0);
     game = new Game();
     player = new Player();
-    expect(game.sprites).toBeDefined();
-    expect(game.sprites.length).toBeGreaterThan(0);
+    expect(game.avatars).toBeDefined();
+    expect(game.player).toBe(player);
     expect(game.current_level).toBeDefined();
     expect($('#jasmine_content #level-container .tube').length).toEqual(1);
   });
@@ -89,5 +89,18 @@ describe("Game", function() {
     it('should create a websocket', function() {
       expect(window.create_websocket).toHaveBeenCalled();
     });
+
+    it("sends a position for each tick", function() {
+      socket_spy.send = jasmine.createSpy('sender');
+      game.next_tick();
+      expect(socket_spy.send).toHaveBeenCalled();
+      expect(JSON.parse(socket_spy.send.mostRecentCall.args[0])).toEqual({name:'anonymous',position: {x:0, y:GRAVITY}});
+    });
+
+    it("listens to the socket for new avatars and adds them to the avatars array", function() {
+      $('body').trigger('ws_message', JSON.stringify({id: '123', name:'opponent', position: { x: 10, y:10 }}));
+      expect(game.avatars['123'].position.x).toEqual(10);
+    });
+
   });
 });

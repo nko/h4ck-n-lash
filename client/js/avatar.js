@@ -5,6 +5,7 @@ Avatar = function(options){
   self.position = options.position || {x:0,y:0};
   self.type = 'avatar';
   self.velocity = {x:0, y:0};
+  self.game = options.game;
 
   self.move = new MovementTracker(); 
   self.direction = self.move.direction;

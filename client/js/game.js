@@ -1,6 +1,7 @@
 var Game = function() {
   var self = this;
-  self.sprites = [];
+  self.avatars = {}; 
+  self.bullets = []; 
   self.platforms = [];
 
   self.socket = create_websocket('ws://127.0.0.1:8001');
@@ -8,17 +9,26 @@ var Game = function() {
   self.on_player_entry = function(ev) {
   	$('#hello').html('Hello, '+ev.player.name);
     ev.player.avatar.game = self;
-    self.sprites.push(ev.player.avatar);
+    self.player = ev.player;
+    self.avatars[ev.player.name] = ev.player.avatar;
     self.current_level = self.get_level();
     self.build_display();
   };
+
   $('body').bind('player.entry', self.on_player_entry );
 
+  self.on_server_message = function(e,msg){
+    opponent = JSON.parse(msg);
+    opponent.game = self;
+    self.avatars[opponent.id] = new Avatar(opponent);
+  };
+
+  $('body').bind('ws_message',self.on_server_message);
   self.on_player_shoot = function(ev){
     var bullet = new Bullet(ev.player);
-    self.sprites.push(bullet);
+    self.bullets.push(bullet);
     setTimeout( function() {
-      self.sprites.splice(self.sprites.indexOf(bullet), 1);
+      self.bullets.splice(self.bullets.indexOf(bullet), 1);
       delete bullet;
     }, BULLET_TIMEOUT );
   };
@@ -39,6 +49,7 @@ var Game = function() {
     self.update_sprites();
     self.refresh_display();
     self.scroll_to_avatar();
+    self.update_server();
   };
 
   // game loop functions
@@ -52,44 +63,38 @@ var Game = function() {
 }
 
 Game.prototype = {
+  update_server: function(){
+    this.socket.send( JSON.stringify({name:this.player.name,position:this.player.avatar.position}));
+  },
   update_sprites: function(){
-    $.each(this.sprites,function( i, sprite){
-      sprite.update_position();
+    $.each(this.avatars,function( i, avatar){
+      avatar.update_position();
+    });
+    $.each(this.bullets,function( i, bullet){
+      bullet.update_position();
     });
   },
   refresh_display: function() {
     var sprites_html = [];
-    $.each(this.sprites,function( i, sprite){
-      sprites_html.push(sprite.html);
+    $.each(this.avatars,function( i, avatar){
+      sprites_html.push(avatar.html);
+    });
+    $.each(this.bullets,function( i, bullet){
+      sprites_html.push(bullet.html);
     });
     $('#sprite-container').empty();
     $('#sprite-container').html(sprites_html.join(''));
   },
   scroll_to_avatar: function() {
-    var avatar = this.avatars[0]
+    var avatar = this.player.avatar;
 //    console.log('width');
     window.scrollTo(avatar.position.x-($(window).width()/2), avatar.position.y-($(window).height()/2));
   },              
   add_platform: function(platform) {
     this.current_level.platforms.push(platform);
   },
-  get bullets() {
-    var bullets = [];
-    for(b in this.sprites)  {
-      if(this.sprites[b].type == 'bullet') {
-        bullets.push(this.sprites[b]);
-      }
-    }
-    return bullets;
-  },
-  get avatars() {
-    var avatars = [];
-    for(b in this.sprites)  {
-      if(this.sprites[b].type == 'avatar') {
-        avatars.push(this.sprites[b]);
-      }
-    }
-    return avatars;
+  get sprites() {
+    return this.bullets + this.avatars;
   },
   get current_avatar() {
     return this.avatars[0];
