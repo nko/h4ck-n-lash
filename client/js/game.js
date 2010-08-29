@@ -27,6 +27,7 @@ var Game = function() {
       message.game = self;
       if(self.avatars[message.id]) {
         self.avatars[message.id].position = message.position;
+        self.avatars[message.id].direction = message.direction;
       } else {
         self.avatars[message.id] = new Avatar(message);
       }
@@ -66,6 +67,7 @@ var Game = function() {
   self.on_bullet_collision = function(ev) {
     ev.bullet.destroy();
     ++self.player.hits;
+    self.socket.send(JSON.stringify({event: 'collision', id: self.player_id, owner_id: ev.bullet.owner_id}));
   };
   
   $('body').bind('bullet.collision', self.on_bullet_collision);
@@ -99,12 +101,15 @@ var Game = function() {
 
 Game.prototype = {
   update_server: function(){
-    this.socket.send( JSON.stringify({id:this.player_id,name:this.player.name,position:this.player.avatar.position}));
+    this.socket.send( JSON.stringify({id:this.player_id,name:this.player.name,position:this.player.avatar.position, direction: this.player.avatar.direction}));
   },
   update_sprites: function(){
     $.each(this.avatars,function( i, avatar){
-      avatar.update_position();
+      avatar.update_animation();
     });
+
+    this.player.avatar.update_position();
+
     $.each(this.bullets,function( i, bullet){
       bullet.update_position();
     });

@@ -6,6 +6,18 @@ describe('Avatar', function() {
     avatar = player.avatar;
     game.start();
   });
+
+  describe('init', function() {
+    it('should accept a direction', function() {
+      $('body').trigger('ws_message', JSON.stringify({id: 'foo', position: {x:0, y:0},direction: {x:1, y:1}}));
+      expect(game.avatars['foo']).toBeDefined();
+      var foo = game.avatars['foo'];
+      console.log(foo);
+      expect(foo.direction.x).toEqual(1);
+      expect(foo.direction.y).toEqual(1);
+      repeat(3, function() { game.next_tick() } );
+    });
+  });
   
   describe('accelerate_up', function() {
     it('should subtract from the velocity.y', function() {

@@ -9,7 +9,12 @@ Avatar = function(options){
 
   self.move = new MovementTracker(); 
   self.direction = self.move.direction;
-  self.direction.x = 1;
+  if(options.direction) {
+    self.direction.x = options.direction.x;
+    self.direction.y = options.direction.y;
+  } else {
+    self.direction.x = 1;
+  }
 
   self.animation_cycles = {
     run_right:{y:0,step:90,frames:6},
@@ -37,7 +42,6 @@ Avatar.prototype = {
   },
 
   update_position : function(){
-    this.update_animation();
     this.update_acceleration();
     this.update_position_x();
     this.update_position_y();
@@ -115,5 +119,5 @@ Avatar.prototype = {
       } 
     });
   }
-   
+
 };

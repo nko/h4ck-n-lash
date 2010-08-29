@@ -104,6 +104,13 @@ describe("Game", function() {
         expect(game.bullets).not.toContain(bullet);
         expect(player.hits).toEqual(1);
       });
+
+      it('shoul send a message about the collision', function() {
+        repeat(2, function(){ game.next_tick(); });
+        game.next_tick();
+        expect(JSON.parse(socket_spy.send.calls[1].args[0])).toEqual({event:'collision', id:game.player_id, owner_id:bullet.owner_id});
+      });
+
       it("should not fire a collision event when a player shoots herself", function() {
         game.player_id = 69;
         bullet.owner_id  = game.player_id;
@@ -124,7 +131,14 @@ describe("Game", function() {
       socket_spy.send = jasmine.createSpy('sender');
       game.next_tick();
       expect(socket_spy.send).toHaveBeenCalled();
-      expect(JSON.parse(socket_spy.send.mostRecentCall.args[0])).toEqual({name:'anonymous',position: {x:0, y:GRAVITY}, id:0});
+      expect(JSON.parse(socket_spy.send.mostRecentCall.args[0])).toEqual({name:'anonymous',position: {x:0, y:GRAVITY}, id:0, direction: {x:1, y:0}});
+    });
+
+    it("sends a direction for each tick", function() {
+      socket_spy.send = jasmine.createSpy('sender');
+      game.next_tick();
+      expect(socket_spy.send).toHaveBeenCalled();
+      expect(JSON.parse(socket_spy.send.mostRecentCall.args[0])).toEqual({name:'anonymous',position: {x:0, y:GRAVITY}, id:0, direction: {x:1, y:0}});
     });
 
     it("listens to the socket for new avatars and adds them to the avatars array", function() {
