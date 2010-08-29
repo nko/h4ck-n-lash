@@ -1,6 +1,8 @@
 We are gonna make an epic HTML5 video game
 
 In the server, we are using:
+* vows 0.4.0, http://vowsjs.org/
+* eyes.js origin master, http://github.com/cloudhead/eyes.js
 * connect 0.2.4, http://github.com/senchalabs/Connect
 * node.ws.js origin master, http://github.com/ncr/node.ws.js.git
 

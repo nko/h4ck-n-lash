@@ -1,0 +1,333 @@
+#!/usr/bin/env node
+
+var path   = require('path'),
+    sys    = require('sys'),
+    fs     = require('fs'),
+    events = require('events');
+
+var inspect = require('eyes').inspector({
+    stream: null,
+    styles: { string: 'grey', regexp: 'grey' }
+});
+
+require.paths.unshift(path.join(__dirname, '..', 'lib'));
+
+var vows = require('vows');
+var console = require('vows/console');
+var stylize = require('vows/console').stylize;
+var _reporter = require('vows/reporters/dot-matrix'), reporter = {
+    name: _reporter.name,
+};
+
+var options = {
+    reporter: reporter,
+    matcher: /.*/,
+    watch: false
+};
+
+var files = [];
+
+// Get rid of process runner
+// ('node' in most cases)
+var arg, args = [], argv = process.argv.slice(2);
+
+// Current directory index,
+// and path of test folder.
+var root, testFolder;
+
+//
+// Parse command-line parameters
+//
+while (arg = argv.shift()) {
+    if (arg === __filename) { continue }
+
+    if (arg[0] !== '-') {
+        args.push(arg);
+    } else {
+        arg = arg.match(/^--?(.+)/)[1];
+
+        if (arg[0] === 'r') {
+            options.matcher = new(RegExp)(arg.slice(1));
+        } else if (arg[0] === 'm') {
+            options.matcher = (function (str) { // Create an escaped RegExp
+                var specials = '. * + ? | ( ) [ ] { } \\ ^ ? ! = : $'.split(' ').join('|\\'),
+                    regex    = new(RegExp)('(\\' + specials + ')', 'g');
+                return new(RegExp)(str.replace(regex, '\\$1'));
+            })(arg.slice(1));
+        } else if (arg in options) {
+            options[arg] = true;
+        } else {
+            switch (arg) {
+                case 'json':
+                    _reporter = require('vows/reporters/json');
+                    break;
+                case 'spec':
+                    _reporter = require('vows/reporters/spec');
+                    break;
+                case 'verbose':
+                case 'v':
+                    options.verbose = true;
+                    break;
+                case 'watch':
+                case 'w':
+                    options.watch = true;
+                    break;
+            }
+        }
+    }
+}
+
+if (options.watch) {
+    options.reporter = reporter = require('vows/reporters/watch');
+}
+
+msg('bin', 'argv', args);
+msg('bin', 'options', { reporter: options.reporter.name, matcher: options.matcher });
+
+if (args.length === 0) {
+    msg('bin', 'discovering', 'folder structure');
+    root = fs.readdirSync('.');
+
+    if (root.indexOf('test') !== -1) {
+        testFolder = 'test';
+    } else if (root.indexOf('spec') !== -1) {
+        testFolder = 'spec';
+    } else {
+        abort("runner", "couldn't find test folder");
+    }
+    msg('bin', 'discovered', "./" + testFolder);
+
+    args = paths(testFolder);
+}
+
+if (! options.watch) {
+    reporter.report = function (data) {
+        switch (data[0]) {
+            case 'subject':
+                _reporter.report(data);
+                break;
+            case 'vow':
+            case 'context':
+                _reporter.report(data);
+                break;
+            case 'end':
+                (options.verbose || _reporter.name === 'json') && _reporter.report(data);
+                break;
+            case 'finish':
+                options.verbose ? _reporter.print('\n') : _reporter.print(' ');
+        }
+    };
+    reporter.reset = function () { _reporter.reset && _reporter.reset() };
+
+    files = args.map(function (a) {
+        return path.join(process.cwd(), a.replace(/\.js$/, ''));
+    });
+
+    runSuites(importSuites(files), function (results) {
+        !options.verbose && _reporter.print('\n');
+        msg('runner', 'finish');
+        _reporter.report(['finish', results], {
+            write: function (str) {
+                sys.print(str.replace(/^\n\n/, '\n'));
+            }
+        });
+    });
+} else {
+    msg('watcher', 'watching files in', process.cwd() + '/');
+    //
+    // Watch mode
+    //
+    (function () {
+        var pendulum = [
+            '.   ', '..  ', '... ', ' ...',
+            '  ..', '   .', '   .', '  ..',
+            '... ', '..  ', '.   '
+        ];
+        var strobe = ['.', ' '];
+        var status,
+            cue,
+            current = 0,
+            running = 0,
+            lastRun,
+            colors = ['32m', '33m', '31m'],
+            timer = setInterval(tick, 100);
+
+        process.addListener('uncaughtException', cleanup);
+        process.addListener('exit', cleanup);
+        process.addListener('SIGINT', function () {
+            process.exit(0);
+        });
+        process.addListener('SIGQUIT', function () {
+            changed();
+        });
+
+        cursorHide();
+
+        // Run every 100ms
+        function tick() {
+            if (running && (cue !== strobe)) {
+                cue = strobe, current = 0;
+            } else if (!running && (cue !== pendulum)) {
+                cue = pendulum, current = 0;
+            }
+
+            cursorSave();
+            eraseLine();
+            lastRun && !running && esc(colors[status.errored ? 2 : (status.broken ? 1 : 0)]);
+            print(cue[current]);
+
+            if (current == cue.length - 1) { current = -1 }
+
+            current ++;
+            esc('39m');
+            cursorRestore();
+        }
+
+        //
+        // Utility functions
+        //
+        function print(str)      { sys.print(str) }
+        function esc(str)        { print("\033[" + str) }
+        function eraseLine()     { esc("2K") }
+        function cursorSave()    { esc("s") }
+        function cursorRestore() { esc("u") }
+        function cursorHide()    { esc("?25l") }
+        function cursorShow()    { esc("?25h") }
+        function cleanup()       { eraseLine(), cursorShow(), print('\n') }
+
+        //
+        // Called when a file has been modified.
+        // Run the matching tests and change the status.
+        //
+        function changed(file) {
+            status = { honored: 0, broken: 0, errored: 0, pending: 0 };
+
+            msg('watcher', 'detected change in', file + '.js');
+
+            file = (/-(test|spec)$/.test(file) ? path.join(testFolder, file)
+                                               : path.join(testFolder, file + '-' + testFolder)) + '.js';
+
+            try {
+                fs.statSync(file);
+            } catch (e) {
+                msg('watcher', 'no equivalence found, running all tests.');
+                file = null;
+            }
+
+            var files = (/-(test|spec)\.js$/.test(file) ? [file] : paths(testFolder)).map(function (p) {
+                return path.join(process.cwd(), p.replace(/\.js$/, ''));
+            }).map(function (p) {
+                delete(require.main.moduleCache[p]);
+                return p;
+            });
+
+            running ++;
+
+            runSuites(importSuites(files), function (results) {
+                delete(results.time);
+                print(console.result(results).join('') + '\n\n');
+                lastRun = new(Date);
+                status = results;
+                running --;
+            });
+        }
+
+        //
+        // Watch all relevant files in lib/ and src/,
+        // and call `changed()` on change.
+        //
+        [].concat(paths('lib'), paths('src'), paths(testFolder)).forEach(function (p) {
+            fs.watchFile(p, function (current, previous) {
+                if (new(Date)(current.mtime).valueOf() ===
+                    new(Date)(previous.mtime).valueOf()) { return }
+                else {
+                    changed(path.basename(p, '.js'));
+                }
+            });
+        });
+    })();
+}
+
+function runSuites(suites, callback) {
+    var results = {
+        honored: 0,
+        broken:  0,
+        errored: 0,
+        pending: 0,
+        total:   0,
+        time:    0
+    };
+    reporter.reset();
+
+    (function run(suites, callback) {
+        var suite = suites.shift();
+        if (suite) {
+            msg('runner', "running", suite.subject + ' ', true);
+            suite.run(options, function (result) {
+                Object.keys(result).forEach(function (k) {
+                    results[k] += result[k];
+                });
+                run(suites, callback);
+            });
+        } else {
+            callback(results);
+        }
+    })(suites, callback);
+}
+
+function importSuites(files) {
+    msg(options.watcher ? 'watcher' : 'runner', 'loading', files);
+
+    return files.reduce(function (suites, f) {
+        var obj = require(f);
+        return suites.concat(Object.keys(obj).map(function (s) {
+            return obj[s];
+        }));
+    }, [])
+}
+
+//
+// Recursively traverse a hierarchy, returning
+// a list of all relevant .js files.
+//
+function paths(dir) {
+    var paths = [];
+
+    try { fs.statSync(dir) }
+    catch (e) { return [] }
+
+    (function traverse(dir, stack) {
+        stack.push(dir);
+        fs.readdirSync(stack.join('/')).forEach(function (file) {
+            var path = stack.concat([file]).join('/'),
+                stat = fs.statSync(path);
+
+            if (file[0] == '.' || file === 'vendor') {
+                return;
+            } else if (stat.isFile() && /\.js$/.test(file)) {
+                paths.push(path);
+            } else if (stat.isDirectory()) {
+                traverse(file, stack);
+            }
+        });
+        stack.pop();
+    })(dir || '.', []);
+
+    return paths;
+}
+
+function msg(cmd, subject, str, p) {
+    if (options.verbose) {
+        sys[p ? 'print' : 'puts']( stylize('vows ', 'green')
+              + stylize(cmd, 'bold')
+              + ' ' + subject + ' '
+              + (str ? (typeof(str) === 'string' ? str : inspect(str)) : '')
+              );
+    }
+}
+
+function abort(cmd, str) {
+    sys.puts(stylize('vows ', 'red') + stylize(cmd, 'bold') + ' ' + str);
+    sys.puts(stylize('vows ', 'red') + stylize(cmd, 'bold') + ' exiting');
+    process.exit(-1);
+}
