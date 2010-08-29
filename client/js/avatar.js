@@ -108,6 +108,7 @@ Avatar.prototype = {
     $.each( this.game.current_level.platforms, function( i, platform){
       if( old_position_bottom <= platform.y && new_position_bottom >= platform.y){
         if( self.position.x + AVATAR_WIDTH > platform.x && self.position.x < platform.x_end){
+					//console.log('landed on platform', platform);
           self.position.y = platform.y - AVATAR_HEIGHT;
           self.velocity.y = 0;
         }
