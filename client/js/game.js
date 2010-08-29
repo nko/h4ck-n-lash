@@ -17,9 +17,18 @@ var Game = function() {
   $('body').bind('player.entry', self.on_player_entry );
 
   self.on_server_message = function(e,msg){
-    opponent = JSON.parse(msg);
-    opponent.game = self;
-    self.avatars[opponent.id] = new Avatar(opponent);
+    message = JSON.parse(msg);
+    if(message.event == 'player_id'){
+      console.log('my player id is ' + message.id);
+      self.player_id = message.id;
+    } else {
+      message.game = self;
+      if(self.avatars[message.id]) {
+        self.avatars[message.id].position = message.position;
+      } else {
+        self.avatars[message.id] = new Avatar(message);
+      }
+    }
   };
 
   $('body').bind('ws_message',self.on_server_message);
@@ -70,7 +79,7 @@ var Game = function() {
 
 Game.prototype = {
   update_server: function(){
-    this.socket.send( JSON.stringify({name:this.player.name,position:this.player.avatar.position}));
+    this.socket.send( JSON.stringify({id:this.player_id,name:this.player.name,position:this.player.avatar.position}));
   },
   update_sprites: function(){
     $.each(this.avatars,function( i, avatar){

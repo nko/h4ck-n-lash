@@ -8,6 +8,7 @@ require('./lib/static_server').start(static_port);
 ws_server = ws.createServer( function(player){
   player.addListener('connect',function(){
     sys.log('new websocket connection: ' + this.id);
+    this.write(JSON.stringify({event:'player_id',id:this.id}))
   });
   player.addListener('data',function(msg){
     sys.log('websocket id '+this.id+' data:'+msg);
