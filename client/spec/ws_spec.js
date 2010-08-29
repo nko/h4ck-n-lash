@@ -1,4 +1,5 @@
-describe('Connecting to the server',function(){
+//REMOVE THIS 'x' to run this spec
+xdescribe('Connecting to the server',function(){
   beforeEach(function() {
     restore_websockets_code();
   });
