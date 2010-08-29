@@ -84,4 +84,10 @@ describe("Game", function() {
       });
     });
   });
+
+  describe('creates a websocket connection', function() {
+    it('should create a websocket', function() {
+      expect(window.create_websocket).toHaveBeenCalled();
+    });
+  });
 });

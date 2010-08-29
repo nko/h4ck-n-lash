@@ -3,6 +3,8 @@ var Game = function() {
   self.sprites = [];
   self.platforms = [];
 
+  self.socket = create_websocket('ws://127.0.0.1:8001');
+
   self.on_player_entry = function(ev) {
   	$('#hello').html('Hello, '+ev.player.name);
     ev.player.avatar.game = self;

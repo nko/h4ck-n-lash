@@ -24,6 +24,9 @@ function repeat( number_of_times, callback ) {
 }
 
 beforeEach(function() {
+  real_ws_connection = window.create_websocket;
+  socket_spy = jasmine.createSpy('socket');
+  spyOn(window, 'create_websocket').andReturn(socket_spy);
   $game_container =  $('body');
   $game_container.unbind('player.entry').unbind('player.shoot');
   $(document).unbind('keydown');
@@ -38,3 +41,7 @@ beforeEach(function() {
     }
   })
 });
+function restore_websockets_code() {
+  window.create_websocket = real_ws_connection;
+}
+
