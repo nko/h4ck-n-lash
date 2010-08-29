@@ -15,7 +15,7 @@ xdescribe('Connecting to the server',function(){
     waits(50); 
     runs( function() {
       expect(connected).toBeTruthy();
-      ws.close();
+      ws.disconnect();
     });
   });
   it('should recieve message from other players', function(){
