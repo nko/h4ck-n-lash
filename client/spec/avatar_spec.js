@@ -75,4 +75,13 @@ describe('Avatar', function() {
       });
     });
   });
+/*
+  describe('animations', function() {
+    it('should use run left cycle when character is running left', function(){
+      simulate_left_key_press();
+      game.next_tick();
+      expect(avatar.html).toMatch(/style.*background-position:0px 95px./);
+    });
+  });
+*/
 });

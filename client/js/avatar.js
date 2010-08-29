@@ -4,6 +4,15 @@ Avatar = function(options){
   this.position = options.position || {x:0,y:0};
   this.type = 'avatar';
 
+  this.direction = {x:1,y:0};
+
+  this.animation_cycles = {
+    run_right:{y:0,step:90,frames:6},
+    run_left:{y:95,step:90,frames:6}
+  };
+  
+  this.current_cycle = this.animation_cycles.run_right;
+  this.current_cycle.current_frame = 0;
   this.move = {
     left: false,
     right: false
@@ -14,7 +23,7 @@ Avatar = function(options){
 
 Avatar.prototype = {
   get html() {
-    return '<div id="avatar-'+this.id+'" class="avatar" style="top:'+Math.floor(this.position.y)+'px;left:'+Math.floor(this.position.x)+'px;"><div class="avatar-name">'+this.name+'</div></div>';
+    return '<div id="avatar-'+this.id+'" class="avatar" style="top:'+Math.floor(this.position.y)+'px;left:'+Math.floor(this.position.x)+'px;background-position:'+this.current_cycle.current_frame*this.current_cycle.step+'px '+this.current_cycle.y+'px"><div class="avatar-name">'+this.name+'</div></div>';
   },
 
   accelerate_left : function(){
@@ -29,9 +38,21 @@ Avatar.prototype = {
   },
 
   update_position : function(){
+    this.update_animation();
     this.update_acceleration();
     this.update_position_x();
     this.update_position_y();
+  },
+
+  update_animation : function(){
+    var frame = this.current_cycle.current_frame;
+    if(this.direction.x == 1) this.current_cycle = this.animation_cycles.run_right; 
+    if(this.direction.x == -1) this.current_cycle = this.animation_cycles.run_left;
+    if( frame >= this.current_cycle.frames){
+      this.current_cycle.current_frame = 0;
+    } else {
+      this.current_cycle.current_frame = ++frame;
+    }
   },
 
   update_acceleration: function(){
