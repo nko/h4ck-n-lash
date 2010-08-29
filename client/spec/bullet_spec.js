@@ -21,9 +21,7 @@ describe('Bullet', function(){
     });
     
     it('should move with each frame', function(){
-      var start_position = bullet.position;
       game.next_tick();
-      var end_position = bullet.position;
       expect(bullet.position.x).toEqual( AVATAR_WIDTH / 2 + BULLET_VELOCITY );
     });
 
@@ -31,6 +29,17 @@ describe('Bullet', function(){
       expect(bullet.html).toMatch(/class=.bullet./);
       expect(bullet.html).toMatch(/top:\d+px./);
       expect(bullet.html).toMatch(/left:\d+px./);
+    });
+
+    describe('when the player is moving left', function() {
+      it("should shoot left", function() {
+        player.avatar.move.left = true;
+        simulate_shoot_key_press();
+        var bullets = game.bullets;
+        bullet = bullets[bullets.length-1];
+        game.next_tick();
+        expect(bullet.position.x).toEqual( (AVATAR_WIDTH / 2) - BULLET_VELOCITY );
+      });
     });
   });
 
