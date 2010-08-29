@@ -28,20 +28,29 @@ Avatar.prototype = {
   },
 
   update_position : function(){
-    var self = this;
-    // update acceleration
+    this.update_acceleration();
+    this.update_position_x();
+    this.update_position_y();
+  },
+
+  update_acceleration: function(){
     if(this.move.left) this.accelerate_left();
     if(this.move.right) this.accelerate_right();
-
     //deal with gravity
     this.velocity.y += GRAVITY;
-
+    // make sure we don't exceed max velocity 
     if(Math.abs(this.velocity.y) >= MAX_Y_VELOCITY){
       var direction = this.velocity.y > 0 ? 1 : -1;
       this.velocity.y = MAX_Y_VELOCITY * direction;
     }
+    // apply friction
+    if(!this.move.left && !this.move.right) {
+      this.velocity.x *= AVATAR_FRICTION;
+      if( Math.abs(this.velocity.x) <= 0.05) this.velocity.x = 0;
+    }
+  },
 
-    // update position
+  update_position_x: function(){
     var new_x = this.position.x + this.velocity.x;
     if(new_x <= 0) {
       new_x = 0;
@@ -52,14 +61,27 @@ Avatar.prototype = {
       this.velocity.x = 0;
     }
     this.position.x = new_x;
+  },
+
+  update_position_y: function(){
+    var self = this;
 
     var old_y = this.position.y;
     this.position.y += this.velocity.y;
 
+    // don't move past the bottom of the level
     if( this.position.y > (this.game.current_level.height - AVATAR_HEIGHT)){
       this.position.y = this.game.current_level.height - AVATAR_HEIGHT;
       this.velocity.y = 0;
     }
+
+    // don't move past the top of the level
+    if( this.position.y <= 0){
+      this.position.y = 0; 
+      this.velocity.y = 0;
+    }
+
+    // land on platforms
     var new_position_bottom = this.position.y + AVATAR_HEIGHT;
     var old_position_bottom = old_y + AVATAR_HEIGHT;
     $.each( this.game.current_level.platforms, function( i, platform){
@@ -70,10 +92,6 @@ Avatar.prototype = {
         }
       } 
     });
-    // apply friction
-    if(!this.move.left && !this.move.right) {
-      this.velocity.x *= AVATAR_FRICTION;
-      if( Math.abs(this.velocity.x) <= 0.05) this.velocity.x = 0;
-    }
   }
+   
 };

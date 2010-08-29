@@ -13,6 +13,9 @@ describe('Avatar', function() {
       expect(avatar.velocity.y).toEqual(AVATAR_JUMP_ACCEL);
     });
     it("velocity.y should not exceed the max", function() {
+      game.current_level.height = 900;
+      game.current_level.platforms = [];
+      avatar.position.y = 800;
       expect(avatar.velocity.y).toEqual(0);
       repeat(10, function() { avatar.accelerate_up(); });
       game.next_tick();
@@ -56,6 +59,12 @@ describe('Avatar', function() {
         repeat(10, function(){ game.next_tick(); });
         expect(avatar.position.y).toEqual(game.current_level.height - AVATAR_HEIGHT);
         expect(avatar.velocity.y).toEqual(0);
+      });
+      it('should not mmove off the top of the level', function(){
+        avatar.position.y = 0; 
+        avatar.velocity.y = AVATAR_JUMP_ACCEL; 
+        game.next_tick();
+        expect(avatar.position.y).toEqual(0);
       });
       it('should not fall through platform', function(){
         game.add_platform({x:0,y:300,x_end:400});
