@@ -3,6 +3,7 @@ function Bullet(options) {
   self.type = "bullet";
   self.direction = $.extend({}, options.direction);
   self.position = options.position;
+  self.owner_id = options.owner_id;
 //  self.position = {x:player.avatar.position.x+AVATAR_WIDTH/2, y:player.avatar.position.y+AVATAR_HEIGHT/3};
   
   var diagonal = self.direction.x && self.direction.y;

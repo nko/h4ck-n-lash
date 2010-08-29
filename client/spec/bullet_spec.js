@@ -2,6 +2,7 @@ describe('Bullet', function(){
   var game, player, bullet;
   beforeEach(function(){
     game = new Game();
+    game.player_id = "1234";
     player = new Player();
     simulate_shoot_key_press();
     bullet = game.bullets[0];
@@ -12,14 +13,18 @@ describe('Bullet', function(){
       jasmine.Clock.tick(BULLET_TIMEOUT+1);
       expect(game.bullets.indexOf(bullet)).toEqual(-1);
     });
+    it('should have an owner', function() {
+      expect(bullet.owner_id).toEqual(game.player_id);
+    });
   });
 
   describe('stringified', function() {
-    it('should retain direction and position', function() {
+    it('should retain direction and position and owner_id', function() {
       var bullet_data = JSON.stringify({bullet: bullet});
       var new_item = JSON.parse(bullet_data);
       expect(new_item.bullet.position).toEqual(bullet.position);
       expect(new_item.bullet.direction).toEqual(bullet.direction);
+      expect(new_item.bullet.owner_id).toEqual(bullet.owner_id);
       
     });
   });

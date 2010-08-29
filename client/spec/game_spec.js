@@ -76,6 +76,43 @@ describe("Game", function() {
 
       });
     });
+
+    describe('detect collisions', function() {
+      var bullet;
+      beforeEach(function() {
+        bullet = game.create_bullet({
+          position: { x:AVATAR_WIDTH + BULLET_VELOCITY, y: GRAVITY * 8},   
+          direction: { x: -1, y:0},
+          owner_id: 1337
+        });
+      });
+      it("should not do anythinig for bullets that don't overlap with the player avatar", function() {
+        game.detect_collisions();
+        expect(game.bullets).toContain(bullet);
+        expect(player.hits).toEqual(0);
+      });
+
+      it("fires a collision event when execution-style killing occurs", function() {
+        bullet.position = { x: player.avatar.position.x + 1, y: player.avatar.position.y + 1 }
+        game.detect_collisions();
+        expect(game.bullets).not.toContain(bullet);
+        expect(player.hits).toEqual(1);
+      });
+
+      it("should fire a collision event when a bullet overlaps with the player avatar", function() {
+        repeat(2, function(){ game.next_tick(); });
+        expect(game.bullets).not.toContain(bullet);
+        expect(player.hits).toEqual(1);
+      });
+      it("should not fire a collision event when a player shoots herself", function() {
+        game.player_id = 69;
+        bullet.owner_id  = game.player_id;
+        repeat(2, function(){ game.next_tick(); });
+        expect(game.bullets).toContain(bullet);
+        expect(player.hits).toEqual(0);
+      });
+
+    });
   });
 
   describe('creates a websocket connection', function() {
@@ -87,7 +124,7 @@ describe("Game", function() {
       socket_spy.send = jasmine.createSpy('sender');
       game.next_tick();
       expect(socket_spy.send).toHaveBeenCalled();
-      expect(JSON.parse(socket_spy.send.mostRecentCall.args[0])).toEqual({name:'anonymous',position: {x:0, y:GRAVITY}});
+      expect(JSON.parse(socket_spy.send.mostRecentCall.args[0])).toEqual({name:'anonymous',position: {x:0, y:GRAVITY}, id:0});
     });
 
     it("listens to the socket for new avatars and adds them to the avatars array", function() {

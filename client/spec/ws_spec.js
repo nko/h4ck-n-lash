@@ -1,4 +1,5 @@
-describe('Connecting to the server',function(){
+//REMOVE THIS 'x' to run this spec
+xdescribe('Connecting to the server',function(){
   beforeEach(function() {
     restore_websockets_code();
   });
@@ -14,7 +15,7 @@ describe('Connecting to the server',function(){
     waits(50); 
     runs( function() {
       expect(connected).toBeTruthy();
-      ws.close();
+      ws.disconnect();
     });
   });
   it('should recieve message from other players', function(){
