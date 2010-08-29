@@ -74,6 +74,18 @@ describe('Bullet', function(){
         expect(bullet.position.y).toEqual( ((AVATAR_HEIGHT / 3) + BULLET_VELOCITY ));
       });
     });
+    describe('diagonal shooting', function() {
+      it("the bullet should shoot straight up and right", function() {
+        simulate_up_key_press();
+        simulate_right_key_press();
+        simulate_shoot_key_press();
+        var bullets = game.bullets;
+        bullet = bullets[bullets.length-1];
+        game.next_tick();
+        expect(bullet.velocity.x).toEqual(24.7);
+        expect(bullet.velocity.y).toEqual(-24.7);
+      });
+    });
   });
 
 

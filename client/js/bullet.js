@@ -1,12 +1,14 @@
 function Bullet(player) {
   var self = this;
   self.type = "bullet";
-  self.position = $.extend({}, player.avatar.position);
+  self.direction = $.extend({}, player.avatar.direction);
   self.position = {x:player.avatar.position.x+AVATAR_WIDTH/2, y:player.avatar.position.y+AVATAR_HEIGHT/3};
   
+  var diagonal = self.direction.x && self.direction.y;
+  var axis_velocity = diagonal ? BULLET_DIAGONAL_VELOCITY : BULLET_VELOCITY;
   self.velocity = {
-    x: (player.avatar.direction.x ) * BULLET_VELOCITY, 
-    y: (player.avatar.direction.y ) * BULLET_VELOCITY
+    x: (self.direction.x ) * axis_velocity, 
+    y: (self.direction.y ) * axis_velocity 
   };
 
   return self;
