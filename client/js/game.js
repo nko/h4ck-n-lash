@@ -21,7 +21,9 @@ var Game = function() {
     if(message.event == 'player_id'){
       console.log('my player id is ' + message.id);
       self.player_id = message.id;
-    } else {
+    } else if(message.event=='bullet'){
+      self.create_bullet({position:message.bullet.position, direction: message.bullet.direction});    
+    }else {
       message.game = self;
       if(self.avatars[message.id]) {
         self.avatars[message.id].position = message.position;
@@ -33,14 +35,24 @@ var Game = function() {
 
   $('body').bind('ws_message',self.on_server_message);
   self.on_player_shoot = function(ev){
-    var bullet = new Bullet(ev.player);
+    var position = {x: ev.player.avatar.position.x+AVATAR_WIDTH/2, y: ev.player.avatar.position.y+AVATAR_HEIGHT/3};
+
+    var bullet = self.create_bullet({position:position, direction:ev.player.avatar.direction});
+
+    self.socket.send(JSON.stringify({event:'bullet', id:self.player_id, bullet: bullet}));
+  };
+
+  $('body').bind('player.shoot', self.on_player_shoot)
+
+  self.create_bullet = function(options){
+    var bullet = new Bullet(options);
     self.bullets.push(bullet);
     setTimeout( function() {
       self.bullets.splice(self.bullets.indexOf(bullet), 1);
       delete bullet;
     }, BULLET_TIMEOUT );
+    return bullet;
   };
-  $('body').bind('player.shoot', self.on_player_shoot)
 
   self.on_level_loaded = function(ev){
     self.current_level = ev.level;
