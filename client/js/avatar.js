@@ -2,6 +2,7 @@ Avatar = function(options){
   this.id = Math.random();
   this.name = options.name || 'anonymous';
   this.position = options.position || {x:0,y:0};
+  this.type = 'avatar';
 
   this.move = {
     left: false,
