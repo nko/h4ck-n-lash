@@ -10,7 +10,6 @@ function create_websocket( host ){
   ws.on('message', function(msg) {
     // e.data contains received string.
     $('body').trigger("ws_message", msg);
-    console.log('got a message', msg);
   });
 
   return ws;
