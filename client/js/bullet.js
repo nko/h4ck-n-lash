@@ -1,5 +1,6 @@
 function Bullet(player) {
   var self = this;
+  self.type = "bullet";
   self.position = $.extend({}, player.avatar.position);
   self.position = {x:player.avatar.position.x+AVATAR_WIDTH/2, y:player.avatar.position.y+AVATAR_HEIGHT/3};
   self.velocity = {x:BULLET_VELOCITY, y:0};
