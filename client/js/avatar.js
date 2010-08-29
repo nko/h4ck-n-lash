@@ -1,24 +1,24 @@
 Avatar = function(options){
-  this.id = Math.random();
-  this.name = options.name || 'anonymous';
-  this.position = options.position || {x:0,y:0};
-  this.type = 'avatar';
+  var self = this;
+  self.id = Math.random();
+  self.name = options.name || 'anonymous';
+  self.position = options.position || {x:0,y:0};
+  self.type = 'avatar';
+  self.velocity = {x:0, y:0};
 
-  this.direction = {x:1,y:0};
+  self.move = new MovementTracker(); 
+  self.direction = self.move.direction;
 
-  this.animation_cycles = {
+  self.animation_cycles = {
     run_right:{y:0,step:90,frames:6},
     run_left:{y:95,step:90,frames:6}
   };
   
-  this.current_cycle = this.animation_cycles.run_right;
-  this.current_cycle.current_frame = 0;
-  this.move = {
-    left: false,
-    right: false
-  };
-  this.velocity = {x:0, y:0};
-
+  self.current_cycle = this.animation_cycles.run_right;
+  self.current_cycle.current_frame = 0;
+  self.move.left = false;
+  self.move.right = false;
+  self.velocity = {x:0, y:0};
 };
 
 Avatar.prototype = {

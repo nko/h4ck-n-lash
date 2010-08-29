@@ -5,8 +5,16 @@ function build_simulated_key_press(kc) {
     $game_container.trigger(event);
   };
 }
+function build_simulated_key_up(kc) {
+  return function () {
+    var event = jQuery.Event('keyup');
+    event.keyCode = Config.key_codes[kc];
+    $game_container.trigger(event);
+  };
+}
 for( key_code in Config.key_codes ) {
   window['simulate_' + key_code + '_key_press'] = build_simulated_key_press(key_code);
+  window['simulate_' + key_code + '_key_up'] = build_simulated_key_up(key_code);
 }
 
 function repeat( number_of_times, callback ) {

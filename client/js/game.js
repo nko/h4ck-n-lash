@@ -15,10 +15,7 @@ var Game = function() {
   self.on_player_shoot = function(ev){
     var bullet = new Bullet(ev.player);
     self.sprites.push(bullet);
-    //var index = self.sprites.length-1;
     setTimeout( function() {
-      console.log('deleted a bullet hurray!!!');
-      //self.sprites.splice(index, 1);
       self.sprites.splice(self.sprites.indexOf(bullet), 1);
       delete bullet;
     }, BULLET_TIMEOUT );
