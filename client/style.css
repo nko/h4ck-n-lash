@@ -3,12 +3,16 @@ body {
   margin:0;
   padding:0;
 }
+#game-container {
+  width:960px;
+  margin: 30px auto 0 auto;
+  position: relative;
+}
 #level-container {
   background: #66ffff;
   height: 600px;
   width: 960px;
-  margin-top: 30px;
-  margin-left: 0px;
+  margin: 0px;
   position: absolute;
   overflow: hidden;
 }
@@ -17,8 +21,7 @@ body {
   overflow: hidden;
   height: 600px;
   width: 960px;
-  margin-top: 30px;
-  margin-left: 0px;
+  margin: 0px;
   z-index: 100;
   top: 0;
   left: 0;
@@ -54,6 +57,7 @@ body {
 
 #hud #hud-twitter {
 	position: fixed;
+  z-index: 1337;
 	background-image: url('/images/twitter.png');
 	background-position: top left;
 	width:126px;
@@ -64,6 +68,7 @@ body {
 
 #hud #hud-voteko {
 	position: fixed;
+  z-index: 1337;
 	background-image: url('/images/voteko.png');
 	background-position: top left;
 	width:126px;
