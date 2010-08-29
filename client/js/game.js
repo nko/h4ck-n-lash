@@ -12,7 +12,6 @@ var Game = function() {
     self.player = ev.player;
     self.avatars[ev.player.name] = ev.player.avatar;
     self.get_level();
-    self.build_display();
   };
 
   $('body').bind('player.entry', self.on_player_entry );
