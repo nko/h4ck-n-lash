@@ -14,6 +14,16 @@ describe('Bullet', function(){
     });
   });
 
+  describe('stringified', function() {
+    it('should retain direction and position', function() {
+      var bullet_data = JSON.stringify({bullet: bullet});
+      var new_item = JSON.parse(bullet_data);
+      expect(new_item.bullet.position).toEqual(bullet.position);
+      expect(new_item.bullet.direction).toEqual(bullet.direction);
+      
+    });
+  });
+
   describe('moving the bullet', function(){
     it('should have a position and velocity', function(){
       expect(bullet.position).toBeDefined();
