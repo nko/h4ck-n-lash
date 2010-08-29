@@ -20,8 +20,8 @@ Config = {
     right: 39,
     up: 38,
     down: 40,
-    jump: 70,
-    shoot: 32
+    jump: 88,
+    shoot: 90
   }
 };
 
