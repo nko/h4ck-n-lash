@@ -10,7 +10,17 @@ var Level = function(level_id) {
     self.html = new_level.html;
     self.width = new_level.width;
     self.height = new_level.height;
+    self.stylesheet = new_level.stylesheet;
     self.platforms = new_level.platforms;
+
+    // adjust the width of the game elements
+    $('#game-container').css('width', self.width).css('height', self.height);
+    $('#level-container').css('width', self.width).css('height', self.height);
+    $('#sprite-container').css('width', self.width).css('height', self.height);
+
+    // load the appropriate stylesheet
+    $('#styler').html("<link type='text/css' rel='stylesheet' href='"+this.stylesheet+"'/>");
+    
     return self;
   };
 
@@ -23,6 +33,7 @@ var level_0 ={
   name: 'prototype',
   height:600,
   width:960,
+  stylesheet: '/level0.css',
   platforms:[
     {y:580,x:0,x_end:960},
     {y:400,x:0,x_end:300},
@@ -30,4 +41,14 @@ var level_0 ={
     {y:180,x:400,x_end:600} 
   ],
   html:  " <div id='platform1' class='floor'></div> <div id='platform2' class='floor'></div> <div id='platform3' class='floor'></div> <div id='platform4' class='floor'></div> <div id='candy1' ><img src='/images/cheeseburger.jpg' height='200' width='150'/></div> <div id='candy2' >CLOUD</div> <div id='candy3' >CLOUD</div> <div id='candy4' >CLOUD</div> <div class='tube' id='rdtube' ></div>"
+};
+
+var level_1 ={
+  id: 1,
+  name: 'prototype',
+  height:1400,
+  width:1400,
+  stylesheet: '/level1.css',
+  platforms:[],
+  html:  ""
 };

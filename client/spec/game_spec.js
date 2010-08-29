@@ -82,6 +82,6 @@ describe("Game", function() {
         });
 
       });
-    })
+    });
   });
 });

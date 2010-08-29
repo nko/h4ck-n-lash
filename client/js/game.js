@@ -36,6 +36,7 @@ var Game = function() {
   self.next_tick = function(){
     self.update_sprites();
     self.refresh_display();
+    self.scroll_to_avatar();
   };
 
   // game loop functions
@@ -62,6 +63,11 @@ Game.prototype = {
     $('#sprite-container').empty();
     $('#sprite-container').html(sprites_html.join(''));
   },
+  scroll_to_avatar: function() {
+    var avatar = this.avatars[0]
+//    console.log('width');
+    window.scrollTo(avatar.position.x-($(window).width()/2), avatar.position.y-($(window).height()/2));
+  },              
   add_platform: function(platform) {
     this.current_level.platforms.push(platform);
   },
@@ -82,5 +88,8 @@ Game.prototype = {
       }
     }
     return avatars;
+  },
+  get current_avatar() {
+    return this.avatars[0];
   }
 };
