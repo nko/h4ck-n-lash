@@ -1,33 +1,24 @@
 var sys = require('sys');
-var connect = require('./vendor/connect/lib/connect');
 var ws = require('./vendor/node.ws.js/ws');
-//var connection_pool = require('./lib/connection_pool');
-
-static_server = connect.createServer(
-	connect.logger({ format: ':method :url' }),
-	connect.bodyDecoder(),
-	connect.staticProvider('./client')
-);
+var player_pool = require('./lib/player_pool').create();
 
 static_port = process.env.NODE_PORT || 80;
-static_server.listen(parseInt(static_port));
-sys.log('Static server listening on port ' + static_port);
+require('./lib/static_server').start(static_port);
 
-ws_server = ws.createServer(function(socket){
-  socket.addListener('connect',function(){});
-  socket.addListener('data',function(){});
-  socket.addListener('close',function(){});
+ws_server = ws.createServer( function(player){
+  player.addListener('connect',function(){
+    sys.log('new websocket connection: ' + this.id);
+  });
+  player.addListener('data',function(msg){
+    sys.log('websocket id '+this.id+' data:'+msg);
+    player_pool.broadcast(this.id, msg); 
+  });
+  player.addListener('close',function(){
+    sys.log('websocket connection closed id '+this.id);
+    player_pool.destroy(this.id);
+  });
 
-  socket.send = function(msg){
-    this.write(JSON.stringify(msg))
-  };
-  socket.broadcast = function(msg){
-    var json = JSON.stringify(msg);
-//    var sockets = connection_pool.find();
-    for(i in sockets){
-      sockets[i].write(json);
-    } 
-  };
+  player_pool.add(player);
 });
 
 ws_port = 8001;
