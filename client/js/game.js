@@ -76,7 +76,6 @@ var Game = function() {
   };
 
   self.build_display = function(){
-    //load level
     $('#level-container').html(self.current_level.html);
   };
 
