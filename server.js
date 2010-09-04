@@ -18,7 +18,7 @@ socket.on( 'clientConnect', function(client){
   sys.log('new websocket connection: ' + client.sessionId);
   
   //var level_id = Math.floor(Math.random()*levels.length);
-  var level_id = 1;
+  var level_id = 2;
 
   player_pool.add_player_to_level( client, level_id);
 

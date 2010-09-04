@@ -125,9 +125,10 @@ Game.prototype = {
       name:this.player.name,
       position:this.player.avatar.position, 
       direction: this.player.avatar.direction,
+      level_id: this.level_id,
       life: this.player.life 
       }));
-    this.socket.send( JSON.stringify({id:this.player_id,level_id:this.level_id,name:this.player.name,position:this.player.avatar.position, direction: this.player.avatar.direction}));
+    //this.socket.send( JSON.stringify({id:this.player_id,level_id:this.level_id,name:this.player.name,position:this.player.avatar.position, direction: this.player.avatar.direction}));
   },
   update_sprites: function(){
     $.each(this.avatars,function( i, avatar){
