@@ -17,7 +17,8 @@ var socket = io.listen( ws_server,{ transports:['websocket','flashsocket'] });
 socket.on( 'clientConnect', function(client){
   sys.log('new websocket connection: ' + client.sessionId);
   
-  var level_id = Math.floor(Math.random()*levels.length);
+  //var level_id = Math.floor(Math.random()*levels.length);
+  var level_id = 1;
 
   player_pool.add_player_to_level( client, level_id);
 
@@ -30,7 +31,7 @@ socket.on( 'clientConnect', function(client){
 });
 
 socket.on('clientMessage', function( msg, client){
-//  SYS.PUTS('MESSAGE: '+MSG);
+  if(msg.event) sys.puts('message: '+msg);
   message = JSON.parse(msg);
   player_pool.broadcast_to_level( message.level_id, msg, client.sessionId);
 });
