@@ -29,7 +29,7 @@ beforeEach(function() {
   $game_container.unbind('ws_message');
 
   real_ws_connection = window.create_websocket;
-  socket_spy = jasmine.createSpyObj('socket', ['send']);
+/*  socket_spy = jasmine.createSpyObj('socket', ['send']);
   spyOn(window, 'create_websocket').andCallFake( function() {
       $game_container.trigger('ws_message', JSON.stringify( {
         level_id: 0,
@@ -46,7 +46,7 @@ beforeEach(function() {
       }));
       return socket_spy;
     }
-  );
+  );*/
   $(document).unbind('keydown');
   jasmine.Clock.useMock();
   jasmine.Clock.reset();
