@@ -51,6 +51,10 @@ var Game = function() {
     var bullet = self.create_bullet({position:position, owner_id: self.player_id, direction:ev.player.avatar.direction});
 
     self.socket.send(JSON.stringify({event:'bullet', id:self.player_id, level_id:self.level_id, bullet: bullet}));
+    shoot = new Audio('sound/shoot.mp3');
+    shoot.play();
+    delete shoot;
+    
   };
 
   $('body').bind('player.shoot', self.on_player_shoot)

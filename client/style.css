@@ -87,6 +87,7 @@ body {
 	top:0;
   text-align: right;
   padding-right: 10px;
+  z-index: 200;
 }
 .bullet {
   position:absolute;
