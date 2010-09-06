@@ -53,7 +53,11 @@ Avatar.prototype = {
     
     if(this.direction.x == 1) this.current_cycle = this.animation_cycles.run_right; 
     if(this.direction.x == -1) this.current_cycle = this.animation_cycles.run_left;
-    
+    //stop animating unless we are running or jumping
+    if(Math.abs(this.velocity.x) < 1 && this.velocity.y==0) {
+      this.current_frame = 5;
+      return;
+    }
     if( this.current_frame >= this.current_cycle.frames){
       this.current_frame = 0;
     } else {
