@@ -6,5 +6,5 @@ In the server, we are using:
 
 In the client, we are using:
 * jquery 1.4.2, http://jquery.com/
-* jasmine 1.0.0rc, http://pivotal.github.com/jasmine/
+* jasmine 1.0.0rc, https://jasmine.github.io/
 * web-socket-js origin master, http://github.com/gimite/web-socket-js/
